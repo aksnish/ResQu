@@ -1,0 +1,425 @@
+<project name="Obvio" default="compile" basedir=".">
+
+<!-- ===================== Property Definitions =========================== -->
+
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties"/>
+
+<!-- ==================== File and Directory Names ======================== -->
+
+  <property name="app.name"       value="obvio"/>
+  <property name="app.path"       value="/${app.name}"/>
+  <property name="app.version"    value="1.0-dev"/>
+  <property name="src.home"       value="${basedir}/src"/>
+  <property name="lib.home"       value="${basedir}/lib"/>
+  <property name="hadoop.jar"       value="${basedir}/hadoop-jar"/> 
+  <property name="hadoop.classes"       value="${basedir}/hadoop-classes"/>
+ 	
+<!--  ==================== Compilation Control Options ==================== -->
+
+  <property name="compile.debug"       value="true"/>
+  <property name="compile.deprecation" value="false"/>
+  <property name="compile.optimize"    value="true"/>
+
+<!-- ==================== Compilation Classpath =========================== -->
+
+  <path id="compile.classpath">
+    
+   <fileset dir="${lib.home}">
+      <include name="*.jar"/>
+    </fileset>
+  	
+  </path>
+
+<!-- ==================== Clean Target ==================================== -->
+
+  <target name="clean" description="Delete old build and hadoop directories">
+  	<delete  dir="${hadoop.classes}"/>
+  	<delete  dir="${hadoop.jar}"/>
+    <delete  file="${lib.home}/${app.name}.jar"/>
+  </target>
+
+<!-- ==================== Compile Target ================================== -->
+
+  <target name="compile" depends="clean, prepare" description="Compile Java sources">
+    <!-- Compile Java classes as necessary -->
+    	
+  		<javac srcdir="${src.home}/" destdir="${hadoop.classes}" debug="${compile.debug}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+  			<classpath refid="compile.classpath" />
+  		</javac>
+  	
+  		<!-- Copy application resources -->
+        <jar jarfile="${lib.home}/${app.name}.jar" basedir="${hadoop.classes}"/>
+
+		<!-- Create one jar with all jar files -->
+        <zip destfile="${hadoop.jar}/project.jar">
+                <zipgroupfileset dir="${lib.home}" includes="*.jar"/>
+        </zip>
+
+  </target>
+	
+<!-- ==================== Prepare Target ================================== -->
+
+  <target name="prepare">
+    <!-- Create build directories as needed -->
+  	<mkdir  dir="${hadoop.jar}"/>
+  	<mkdir  dir="${hadoop.classes}"/>
+  </target>
+
+<!-- ================= Run Target ==================================== -->
+
+  <target name="run" depends="clean, compile" description="Runs the application">
+    <java classname="${run.class}" fork="yes">
+      
+       <classpath>
+      	<fileset dir="${lib.home}">
+      		<include name="**/*.jar"/>
+    	</fileset>
+
+       	<pathelement path="${hadoop.classes}" />
+       	
+      </classpath>
+    </java>
+  </target>
+
+	<target name="lsmdfs-driver" description="run the Legal Spans MDFS">
+            <antcall target="run-class">
+                    <param name="class.name" value="examples.LSMDFSDriver" />
+            </antcall>
+    </target>
+	
+	<target name="dataset-generator" description="create all datasets">
+            <antcall target="run-class">
+                    <param name="class.name" value="examples.TRECGSGraphDriver" />
+            </antcall>
+    </target>
+	
+	<target name="path-analyzer" description="analyze the various paths obtained from the traversal">
+	            <antcall target="run-class">
+	                    <param name="class.name" value="examples.PathAnalyzerDriver" />
+	            </antcall>
+	</target>
+	
+	<target name="predications-graph" description="extract info from the predications graph">
+	            <antcall target="run-class">
+	                    <param name="class.name" value="examples.PredicationsGraphDriver" />
+	            </antcall>
+	</target>
+	
+	<target name="stats" description="stats checker from the predications graph">
+	            <antcall target="run-class">
+	                    <param name="class.name" value="examples.Stat" />
+	            </antcall>
+	</target>
+	
+	<target name="legalspans-dataset-generator" description="perform various functionality related to legal spans">
+	            <antcall target="run-class">
+	                    <param name="class.name" value="examples.LegalSpansDatasetDriver" />
+	           	</antcall>
+	</target>
+	
+	<target name="index-query" description="query the lucene index of the corpus">
+	            <antcall target="run-class">
+	                    <param name="class.name" value="core.gov.lhncbc.nlm.nih.corpus.CorpusIndex" />
+	           	</antcall>
+	</target>
+
+        <target name="simulator" description="use the pred scores to score the documents">
+                <antcall target="run-class">
+                        <param name="class.name" value="bin.ScoredDocumentPairSimulator" />
+                </antcall>
+        </target>
+
+        <target name="index-writer" description="use the pred scores to score the documents">
+                <antcall target="run-class">
+                        <param name="class.name" value="examples.IndexWriterDriver" />
+                </antcall>
+        </target>
+
+        <target name="doc-pred-generator" description="create a tsv with each corpus predication against each doc predication ">
+                <antcall target="run-class">
+                        <param name="class.name" value="data.DocumentPredicationGenerator" />
+                </antcall>
+        </target>
+
+        <target name="concept-pairs-generator" description="generate the concept pairs file">
+                <antcall target="run-class">
+                        <param name="class.name" value="core.gov.lhncbc.nlm.nih.data.ConceptPairGenerator" />
+                </antcall>
+        </target>
+
+    	<target name="concept-pairs-serializer" description="serialize concept pairs file">
+            <antcall target="run-class">
+                    <param name="class.name" value="core.gov.lhncbc.nlm.nih.data.ScoredConceptPairSerializer" />
+            </antcall>
+    	</target>
+	
+        <target name="concept-context-map-serializer" description="create a map of the context for each concept">
+                <antcall target="run-class">
+                        <param name="class.name" value="examples.ConceptContextSerializer" />
+                </antcall>
+        </target>
+
+        <target name="scored-concept-pairs-map" description="put the scored concept pairs in a map for hadoop processing">
+                <antcall target="run-class">
+                        <param name="class.name" value="data.ScoredConceptPairMap" />
+                </antcall>
+        </target>
+
+        <target name="relatedness-scorer" description="checking an example of pred relatedness">
+                <antcall target="run-class">
+                        <param name="class.name" value="examples.RelatednessScorerDriver" />
+                </antcall>
+     </target>
+	
+	 	<target name="corpus-subset" description="select an appropriate subset of the corpus for processing">
+	                <antcall target="run-class">
+	                        <param name="class.name" value="examples.CorpusContextReducerDriver" />
+	                </antcall>
+	 	</target>
+	      
+		<target name="sequential-doc-scorer" description="sequential document scorer">
+		                <antcall target="run-class">
+		                        <param name="class.name" value="examples.DocumentScorerSequential" />
+		                </antcall>
+		 </target>
+	
+	<target name="scored-docs-index-retriever" description="">
+	                <antcall target="run-class">
+	                        <param name="class.name" value="core.gov.lhncbc.nlm.nih.corpus.index.ScoredDocumentIndex" />
+	                </antcall>
+	 </target>
+	
+	<target name="scorer" description="">
+	                <antcall target="run-class">
+	                        <param name="class.name" value="core.gov.lhncbc.nlm.nih.relatedness.scoring.DocumentScorer" />
+	                </antcall>
+	 </target>
+	       
+	<target name="cp-scorer" description="">
+	                <antcall target="run-class">
+	                        <param name="class.name" value="core.gov.lhncbc.nlm.nih.relatedness.scoring.ConceptPairScorer" />
+	                </antcall>
+	 </target>
+	 
+	<target name="mbfs-driver" description="">
+	                <antcall target="run-class">
+	                        <param name="class.name" value="swanson.examples.MBFSDriver" />
+	                </antcall>
+	 </target>
+	
+	<target name="bi-directional-dfs-driver" description="implemented a bi-directional DFS algorithms">
+	                <antcall target="run-class">
+	                        <param name="class.name" value="swanson.examples.DFSDriver" />
+	                </antcall>
+	 </target>
+	
+	<target name="swanson-pred-graph-builder-driver" description="">
+	                <antcall target="run-class">
+	                        <param name="class.name" value="swanson.examples.SwansonPredicationsGraphDriver" />
+	                </antcall>
+	 </target>
+	 
+	<target name="swanson-subgraph-generator-driver" description="">
+	                <antcall target="run-class">
+	                        <param name="class.name" value="swanson.examples.SubgraphGeneratorDriver" />
+	                </antcall>
+	 </target>
+	
+	<target name="swanson-graph-analyzer-driver" description="">
+		<antcall target="run-class">
+			<param name="class.name" value="swanson.examples.SwansonGraphAnalyzer" />
+		</antcall>
+	</target>
+	
+	<target name="swanson-semrep-relation-parser-driver" description="parse the relations from the semrep output">
+		<antcall target="run-class">
+			<param name="class.name" value="swanson.examples.SemRepRelationParserDriver" />
+		</antcall>
+	</target>
+	   
+	<target name="swanson-textfileformatter-driver" description="convert the raw text to ascii format and medline format">
+		<antcall target="run-class">
+			<param name="class.name" value="swanson.examples.TextFileFormatterDriver" />
+		</antcall>
+	</target>
+	
+	<target name="path-visualizer-driver" description="visualize paths">
+		<antcall target="run-class">
+			<param name="class.name" value="subgraph.examples.PathVisualizationDriver" />
+		</antcall>
+	</target>
+	
+	<target name="graph-transformer" description="flip nodes and edges in the rdf graph">
+		<antcall target="run-class">
+			<param name="class.name" value="subgraph.examples.GraphTransformerDriver" />
+		</antcall>
+	</target>
+	
+	<target name="rel-graph-dfs-driver" description="traverse the flipped graph">
+		<antcall target="run-class">
+			<param name="class.name" value="subgraph.examples.RelGraphDFSDriver" />
+		</antcall>
+	</target>
+	
+	<target name="virtuoso-conn" description="test code for connecting to Virtuoso on mordev3">
+		<antcall target="run-class">
+			<param name="class.name" value="subgraph.examples.VirtConnect" />
+		</antcall>
+	</target>
+	
+	<target name="mesh-tree-indexer" description="create the mesh tree">
+			<antcall target="run-class">
+				<param name="class.name" value="subgraph.examples.MeshTreeIndexerDriver" />
+			</antcall>
+	</target>
+	
+	<target name="mesh-tree-reader" description="read the mesh tree">
+				<antcall target="run-class">
+					<param name="class.name" value="subgraph.examples.MeSHTreeIndexReaderDriver" />
+				</antcall>
+		</target>
+	
+	<target name="mesh-tree-to-level-map" description="create the mesh tree as a level map">
+				<antcall target="run-class">
+					<param name="class.name" value="subgraph.examples.MeSHTreeIndexReaderDriver" />
+				</antcall>
+		</target>
+			
+	<target name="medline-to-mesh" description="get the list of mesh terms for pmid(s)">
+		<antcall target="run-class">
+			<param name="class.name" value="subgraph.examples.MedlineToMeSHIndexerDriver" />
+		</antcall>
+	</target>
+	
+	<target name="medline-to-predication" description="get the list of predications for a pmid">
+		<antcall target="run-class">
+			<param name="class.name" value="subgraph.examples.MedlineToPredicationIndexerDriver" />
+		</antcall>
+	</target>
+		
+	<target name="predication-to-medline" description="get the list of pmids for each predication">
+		<antcall target="run-class">
+			<param name="class.name" value="subgraph.examples.PredicationToMedlineIndexerDriver" />
+		</antcall>
+	</target>
+	
+	<target name="predication-to-mesh" description="get the list of mesh terms and their frequencies for each predication">
+			<antcall target="run-class">
+				<param name="class.name" value="subgraph.examples.PredicationToMeSHIndexerDriver" />
+			</antcall>
+		</target>
+		
+	<target name="subgraph-generator" description="generate the list of all subgraphs">
+			<antcall target="run-class">
+				<param name="class.name" value="subgraph.examples.SubgraphGeneratorDriver" />
+			</antcall>
+		</target>
+	
+	<target name="mesh-semantic-similarity-reader" description="read index of mesh descriptor similarity scores">
+			<antcall target="run-class">
+				<param name="class.name" value="subgraph.examples.MeSHSemanticSimilarityReaderDriver" />
+			</antcall>
+		</target>
+
+	<target name="mesh-semantic-similarity-writer" description="create the index of mesh descriptor similarity scores">
+				<antcall target="run-class">
+					<param name="class.name" value="subgraph.examples.MeSHSemanticSimilarityWriterDriver" />
+				</antcall>
+			</target>
+	
+	<target name="similarity-subset-creator" description="create an index of mesh descriptor similarity scores">
+			<antcall target="run-class">
+				<param name="class.name" value="subgraph.examples.SubsetSimilarityDriver" />
+			</antcall>
+		</target>
+
+	<target name="cui-to-label-map" description="create a map between cui and label for all concepts in the predications graph">
+			<antcall target="run-class">
+				<param name="class.name" value="subgraph.examples.CuiToLabelDriver" />
+			</antcall>
+		</target>
+	
+	<target name="medline-corpus-selector" description="create a map between cui and label for all concepts in the predications graph">
+				<antcall target="run-class">
+					<param name="class.name" value="subgraph.examples.MedlineCorpusSelectorDriver" />
+				</antcall>
+			</target>
+	
+	<target name="path-generator-driver" description="get paths between two nodes up to length n">
+				<antcall target="run-class">
+					<param name="class.name" value="subgraph.examples.PathGeneratorDriver" />
+				</antcall>
+			</target>
+	
+	<target name="path-vector-builder" description="generate the path vectors for all paths">
+				<antcall target="run-class">
+					<param name="class.name" value="subgraph.examples.PathVectorBuilderDriver" />
+				</antcall>
+			</target>
+					
+	<target name="path-test" description="does any path contain a concept c">
+				<antcall target="run-class">
+					<param name="class.name" value="bin.PathTest" />
+				</antcall>
+			</target>
+	
+	<target name="predications-graph-test" description="show all predications in a the predications graph">
+				<antcall target="run-class">
+					<param name="class.name" value="bin.PredicationGraphTest" />
+				</antcall>
+			</target>
+	
+	<target name="clustering-test" description="">
+					<antcall target="run-class">
+						<param name="class.name" value="bin.clustering.HierarchicalClusteringDriver" />
+					</antcall>
+				</target>
+	
+	<target name="medline-search-results-cache" description="">
+					<antcall target="run-class">
+						<param name="class.name" value="bin.MedlineSearchResultsCache" />
+					</antcall>
+				</target>
+	
+	<target name="mesh-similarity-score" description="get the list of scores with its frequencies">
+		<antcall target="run-class">
+			<param name="class.name" value="subgraph.examples.MeSHSemanticSimilarityComparatorDriver" />
+		</antcall>
+	</target>
+		
+	<target name="rarity-ranker-driver" description="get the frequencies for all concepts in each path">
+			<antcall target="run-class">
+				<param name="class.name" value="subgraph.examples.RarityRankerDriver" />
+			</antcall>
+		</target>
+	
+	<target name="subgraph-evaluation-driver" description="executes various tasks for a statistical evaluation of subgraph quality">
+			<antcall target="run-class">
+				<param name="class.name" value="subgraph.examples.EvaluationDriver" />
+			</antcall>
+		</target>
+			
+		<target name="run-class" description="run given class">
+
+                <property name="class.name" value="" />
+
+                <java classname="${class.name}" fork="yes">
+
+ 		       	<jvmarg value="-Xms8192m" />
+                <jvmarg value="-Xmx16388m" />
+               	<!--<jvmarg value="-Xmx16388m" />-->
+                <!--<jvmarg value="-Xmx65552m" />-->
+                	
+                        <classpath>
+                                <fileset dir="${lib.home}">
+                                        <include name="**/*.jar" />
+                                </fileset>
+                        	
+                        	<pathelement path="${hadoop.classes}" />
+
+                        </classpath>
+                </java>
+        </target>
+
+</project>

@@ -1,0 +1,16 @@
+
+UI  - 24411709
+TI  - Doxycycline in Creutzfeldt-Jakob disease: a phase 2, randomised, double-blind, placebo-controlled trial.
+AB  - Agenzia Italiana Farmaco, Italian Ministry of Health, AIEnP, and French Ministry of Health.
+
+UI  - 24122181
+TI  - Quinacrine treatment trial for sporadic Creutzfeldt-Jakob disease.
+AB  - This study provides Class I evidence that quinacrine does not improve survival for people with sCJD when given orally at a dose of 300 mg per day for 2 months.
+
+UI  - 15007119
+TI  - Efficacy of flupirtine on cognitive function in patients with CJD: A double-blind study.
+AB  - FLU has beneficial effects on cognitive function in patients with CJD. These positive results also may suggest a treatment potential of FLU in other neurodegenerative disorders. However, further studies are necessary.
+
+UI  - 14739538
+TI  - Results of quinacrine administration to patients with Creutzfeldt-Jakob disease.
+AB  - Several chemicals inhibit the accumulation of abnormal prion proteins in vitro. We administered one, the antimalarial agent quinacrine, to three patients with sporadic Creutzfeldt-Jakob disease (CJD) and to one with iatrogenic CJD. Quinacrine at 300 mg/day was given enterally for 3 months. Within 2 weeks of administration, the arousal level of the patient with akinetic mutism improved. The other 3 patients, insensible before treatment, had integrative responses such as eye contact or voluntary movement in response to verbal and/or visual stimuli restored. Clinical improvement was transient, lasting 1-2 months during treatment. Quinacrine was well tolerated, except for liver dysfunction and yellowish pigmentation. Although its antiprion activity in the human brain has yet to be proved, these modest effects of quinacrine suggest the possibility of using chemical intervention against prion diseases.
