@@ -1,0 +1,10 @@
+Prophylactic treatment-TREATS-Migraine Disorders
+Migraine Disorders-TREATS-Adult
+rizatriptan-TREATS-Migraine Disorders
+frovatriptan-TREATS-Migraine Disorders
+Triptans-TREATS-Migraine Disorders
+Headache-TREATS-Adult
+Sumatriptan-TREATS-Migraine Disorders
+Naproxen sodium-TREATS-Migraine Disorders
+Migraine Disorders-TREATS-Child
+Metoclopramide-TREATS-Migraine Disorders
