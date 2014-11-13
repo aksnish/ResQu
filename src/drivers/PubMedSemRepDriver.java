@@ -42,7 +42,7 @@ public class PubMedSemRepDriver {
 			FileWriter fw = null;
 			try {
 				file = setFilename(query);
-				fw = new FileWriter("disease/"+file,false);
+				fw = new FileWriter("data/"+file,false);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
