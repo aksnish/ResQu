@@ -12,27 +12,17 @@ import java.util.Set;
 
 public class SemrepTripleExtractor {
 
-	String predication ="";
-	public String getPreds(String ip){
-		boolean str = new File(ip).isFile();
-		String ret;
-		if(str==true){
-			ret = getFilePredications(ip);
-		}
-		else{
-			ret = getInputPredications(ip);
-		}
-		return ret;
-
-	}
 	@SuppressWarnings("unused")
-	public String getFilePredications (String inputFile){ //, String outputFile){
-
-
+	public void getFilePredications (String inputFile, String outputFile){
+		Predication pred = new Predication();
+		String preferred_name = outputFile.replaceAll("_S", " ").replaceAll("_", " ");
+		preferred_name = preferred_name.substring(preferred_name.indexOf("/")+1, preferred_name.length());
+		//System.out.println(preferred_name);
+	
 		FlatFileContentIterator ffcit = new FlatFileContentIterator(inputFile);
 		try{
 
-			//PrintWriter out = new PrintWriter(outputFile);
+			PrintWriter out = new PrintWriter(outputFile);
 			while (ffcit.hasNext())
 			{
 				String line = ffcit.next();
@@ -45,86 +35,27 @@ public class SemrepTripleExtractor {
 				}
 				if(line.contains("|")){
 
-					String subject = getSubjects(line);
-					String predicate = getPredicate(line);
-					String object = getObjects(line);
-					if(object.equalsIgnoreCase("Migraine Disorders")&&(predicate.equalsIgnoreCase("TREATS")||predicate.equalsIgnoreCase("PREVENTS")))
-						//						System.out.println(subject +"-" + predicate + "-" + object);
-						//serialize(subject, predicate, object, out);
-						predication +=subject+"-"+predicate+"-"+object+"\n";
+					String subject = pred.getSubject(line);
+					String predicate = pred.getPredicate(line);
+					String object = pred.getObject(line);
+					if(predicate.equals("TREATS")&&object.equals("Migraine Disorders")){
+						serialize(subject, predicate, object, out);
+					}
+					else
+					{
+					}
 				}
 			}
 			ffcit.close();
-			//			out.close();
+			out.close();
 		}
 		catch (Exception e){
 
 		}
-		return predication;
 	}
-
-
-	public String getInputPredications (String predString){ //, String outputFile){
-		String [] preds = predString.split("\n");
-		try{
-
-			//PrintWriter out = new PrintWriter(outputFile);
-			for(String pred : preds)
-			{
-
-				if(pred.contains("----"))
-					continue;
-				if(pred == null)
-					continue;
-				if(pred.split("\\|").length != 13 ){
-					continue;
-				}
-				if(pred.contains("|")){
-
-					String subject = getSubjects(pred);
-					String predicate = getPredicate(pred);
-					String object = getObjects(pred);
-					if(object.equalsIgnoreCase("Migraine Disorders")&&(predicate.equals("TREATS")||predicate.equalsIgnoreCase("PREVENTS")))
-						//						System.out.println(subject +"-" + predicate + "-" + object);
-						//serialize(subject, predicate, object, out);
-						predication += subject+"-"+predicate+"-"+object+"\n";
-				}
-			}
-		}
-		catch (Exception e){
-
-		}
-		return predication;
-	}
-
-
 
 	public void serialize(String subject, String predicate, String object, PrintWriter out) {
 		String delimeter = "-";
 		out.println(subject+delimeter+predicate+delimeter+object);
 	}
-
-	private String getSubjects(String line) {
-		return line.split("\\|")[3].trim();
-	}
-
-	private String getPredicate(String line) {
-		return line.split("\\|")[8].trim();
-	}
-
-	private String getObjects(String line) {
-
-
-		return line.split("\\|")[10].trim();
-	}
-
-	//	public static void main (String args [])
-	//	{
-	//
-	//		SemrepTripleExtractor semrep = new SemrepTripleExtractor();
-	//		String inputFile= "semrep.txt";
-	//		String outputFile= "nsemtest1.txt";
-	//		semrep.getPredications(inputFile, outputFile);
-	//	}
-
 }
