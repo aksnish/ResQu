@@ -94,7 +94,7 @@ public class PubMedCitationToSemRep
 
 		String results = null;
 
-		String batchCommand = Constants.metaMapCommand;
+		String batchCommand = Constants.defaultCommand;
 		String batchNotes = "SKR API Test";
 		boolean silentEmail = false;
 		boolean silentOnErrors = false;
