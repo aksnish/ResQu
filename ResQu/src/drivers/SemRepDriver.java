@@ -19,7 +19,7 @@ public class SemRepDriver {
 		String results;
 		PrintWriter writer;
 
-		File directory = new File("disease/");
+		File directory = new File("data/");
 		File[] directoryListing = directory.listFiles();
 		if (directoryListing != null) {
 			for (File file : directoryListing) {
