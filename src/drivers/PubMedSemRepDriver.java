@@ -4,6 +4,7 @@ import gov.nih.nlm.pubmed.PubMedCitationRetriever;
 import gov.nih.nlm.pubmed.PubMedCitationToSemRep;
 import gov.nih.nlm.semrep.utils.SemrepTripleExtractor;
 import gov.nih.nlm.utils.Constants;
+import gov.nih.nlm.utils.FilenameGenerator;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,7 +22,8 @@ public class PubMedSemRepDriver {
 	public static void main(String[] args) throws Exception
 	{
 
-		BufferedReader br = new BufferedReader(new FileReader("disease_topic_list.txt"));
+		FilenameGenerator filegen = new FilenameGenerator();
+		BufferedReader br = new BufferedReader(new FileReader(Constants.DISEASE_LIST));
 		String line, query;
 
 		ArrayList<String> diseases = new ArrayList<String>();
@@ -34,15 +36,18 @@ public class PubMedSemRepDriver {
 			e.printStackTrace();
 		}
 
-		String file;
+		String file, topic;
 		PubMedCitationRetriever pm = new PubMedCitationRetriever();
 		for(int i = 0 ; i<diseases.size();i++){
-			query = diseases.get(i)+Constants.SIMPLE_MESH_HEADINGS;
+			topic = diseases.get(i);
+			query = topic+Constants.SIMPLE_MESH_HEADINGS;
 			System.out.println(query);
 			FileWriter fw = null;
 			try {
-				file = setFilename(query);
-				fw = new FileWriter("data/"+file,false);
+				file =filegen.setFilename(query, topic);
+				System.out.println("Write to file : "+file);
+				
+				fw = new FileWriter(Constants.TOPIC_DISEASE_FILE+file,false);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -54,26 +59,5 @@ public class PubMedSemRepDriver {
 			break;
 
 		}
-	}
-
-	public static String setFilename (String querystr){
-		String query = null; 
-		if(querystr.contains("[MH]"))
-			query = querystr.substring(0, querystr.indexOf("[MH]"));
-		else
-			query=querystr;
-		String split;
-
-		if(query.contains("/"))
-		{
-			split = query.substring(0, query.indexOf('/'))+"_C";
-
-		}else
-		{
-			split = query+"_S";
-		}
-		split.replaceAll("// ", "_");
-		String filename =split+".txt";
-		return filename;
 	}
 }
