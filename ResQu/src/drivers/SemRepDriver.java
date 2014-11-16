@@ -1,6 +1,8 @@
 package drivers;
 
 import gov.nih.nlm.pubmed.PubMedCitationToSemRep;
+import gov.nih.nlm.utils.Constants;
+import gov.nih.nlm.utils.FilenameGenerator;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,23 +16,27 @@ public class SemRepDriver {
 	public static void main(String[] args) throws FileNotFoundException{
 
 
-		PubMedCitationToSemRep psm = new PubMedCitationToSemRep();
+		PubMedCitationToSemRep pubSem = new PubMedCitationToSemRep();
+		FilenameGenerator filegen = new FilenameGenerator();
 		String filename;
 		String results;
 		PrintWriter writer;
 
-		File directory = new File("data/");
+		File directory = new File(Constants.TOPIC_DISEASE_FILE);
 		File[] directoryListing = directory.listFiles();
 		if (directoryListing != null) {
 			for (File file : directoryListing) {
-				filename = file.toString().substring(file.toString().indexOf("/")+1, file.toString().indexOf("."));
-				filename=filename.replaceAll(" ","_");
+				System.out.println(file);
+				//filename = file.toString().substring(file.toString().indexOf("/")+1, file.toString().indexOf("."));
+				filename = filegen.normalizeFileName(file.toString());
+				System.out.println(filename);
+				//filename=filename.replaceAll(" ","_");
 				
-				results = psm.getSemrepedDocuments(file.toString());
-				writer = new PrintWriter("semrep/" + filename +".semrep");
+				results = pubSem.getSemrepedDocuments(file.toString());
+				writer = new PrintWriter(Constants.SEMREP_FOLDER+ filename +".semrep");
 				writer.write(results);
 				try {
-					FileWriter fw = new FileWriter("semrep/" + filename +".semrep");
+					FileWriter fw = new FileWriter(Constants.SEMREP_FOLDER+ filename +".semrep");
 					BufferedWriter bw = new BufferedWriter(fw);
 					bw.write(results);
 					bw.flush();
