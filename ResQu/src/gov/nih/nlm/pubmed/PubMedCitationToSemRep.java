@@ -69,7 +69,7 @@ public class PubMedCitationToSemRep
 		System.out.println("usage: GenericBatchUser [options] inputFilename");
 		System.out.println("  allowed options: ");
 		System.out.println("    --email <address> : set email address. (required option)");
-		System.out.println("    --command <name> : batch command: metamap, semrep, etc. (default: " + Constants.defaultCommand + ")");
+		System.out.println("    --command <name> : batch command: metamap, semrep, etc. (default: " + Constants.DEFAULT_COMMAND + ")");
 		System.out.println("    --note <notes> : batch notes ");
 		System.out.println("    --silent : don't send email after job completes.");
 		System.out.println("    --silent-errors : Silent on Errors");
@@ -89,12 +89,12 @@ public class PubMedCitationToSemRep
 		System.exit(1);
 	}
 
-	public static String getSemrepedDocuments(String inputBuf)
+	public String getSemrepedDocuments(String inputBuf)
 	{
 
 		String results = null;
 
-		String batchCommand = Constants.defaultCommand;
+		String batchCommand = Constants.DEFAULT_COMMAND;
 		String batchNotes = "SKR API Test";
 		boolean silentEmail = false;
 		boolean silentOnErrors = false;
