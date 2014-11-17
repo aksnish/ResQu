@@ -95,7 +95,7 @@ public class PubMedCitationRetriever
 	public static StringBuffer getPredications(String query)
 	{
 		PubMedGetPMID pgp = new PubMedGetPMID();
-		System.out.println("------------------------------------------------------------------------------------");
+		System.out.println("------------------------------------------------------");
 		System.out.println("Getting PMID List");
 		String[] pmids = pgp.getPmidsForKeyword(query,"pubmed", "150000");
 
@@ -111,7 +111,7 @@ public class PubMedCitationRetriever
 			EFetchPubmedServiceStub service = new EFetchPubmedServiceStub();
 			EFetchPubmedServiceStub.EFetchRequest req = new EFetchPubmedServiceStub.EFetchRequest();
 
-			System.out.println("------------------------------------------------------------------------------------");
+			System.out.println("------------------------------------------------------");
 			System.out.println("Getting PubMed Article for each ciations");
 			for(int i = 0 ; i<pmidList.length;i++){
 				req.setId(pmidList[i]);
