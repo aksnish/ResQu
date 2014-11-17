@@ -26,15 +26,16 @@ public class SemRepPubMedCitationsDriver {
 		File[] directoryListing = directory.listFiles();
 		if (directoryListing != null) {
 			for (File file : directoryListing) {
-				System.out.println(file);
-				//filename = file.toString().substring(file.toString().indexOf("/")+1, file.toString().indexOf("."));
-				filename = filegen.normalizeFileName(file.toString());
-				System.out.println(filename);
-				//filename=filename.replaceAll(" ","_");
 				
+				filename = filegen.normalizeFileName(file.toString());
+				
+				System.out.println("----------------------");
+				System.out.println("ConvertigPubMed Citations to SemRep format");
 				results = pubSem.getSemrepedDocuments(file.toString());
-				writer = new PrintWriter(Constants.SEMREP_FOLDER+ filename +".semrep");
-				writer.write(results);
+//				writer = new PrintWriter(Constants.SEMREP_FOLDER+ filename +".semrep");
+//				writer.write(results);
+				
+				System.out.println("Writing to file : "+filename);
 				try {
 					FileWriter fw = new FileWriter(Constants.SEMREP_FOLDER+ filename +".semrep");
 					BufferedWriter bw = new BufferedWriter(fw);

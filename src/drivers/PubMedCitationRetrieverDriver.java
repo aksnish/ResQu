@@ -42,7 +42,7 @@ public class PubMedCitationRetrieverDriver {
 		for(int i = 0 ; i<diseases.size();i++){
 			topic = diseases.get(i);
 			query = topic+Constants.SIMPLE_MESH_HEADINGS;
-			System.out.println("\nPubMed Query : "+query);
+			System.out.println("PubMed Query : "+query);
 
 			file =filegen.setFilename(query, topic);
 
@@ -50,7 +50,7 @@ public class PubMedCitationRetrieverDriver {
 			StringBuffer ps = PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS);
 			//StringBuffer ps = PubMedCitationRetriever.getPredications(query);
 
-			System.out.println("------------------------------------------------------------------------------------");
+			System.out.println("------------------------------------------------------");
 			System.out.println("Writing to file : " + file);
 			try {
 				FileWriter fw = new FileWriter(Constants.TOPIC_DISEASE_FILE+file);
