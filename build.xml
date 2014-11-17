@@ -84,13 +84,13 @@
 
 	<target name="citation-driver" description="run the Legal Spans MDFS">
             <antcall target="run-class">
-                    <param name="class.name" value="drivers.PubMedSemRepDriver" />
+                    <param name="class.name" value="drivers.PubMedCitationRetrieverDriver" />
             </antcall>
     </target>
 			
 	<target name="semrep-driver" description="run the Legal Spans MDFS">
             <antcall target="run-class">
-                    <param name="class.name" value="drivers.SemRepDriver" />
+                    <param name="class.name" value="drivers.SemRepPubMedCitationsDriver" />
             </antcall>
     </target>
 	
