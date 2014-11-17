@@ -1,13 +1,16 @@
 package gov.nih.nlm.pubmed;
 
 
+import java.util.SortedSet;
+
 import gov.nih.nlm.ncbi.www.soap.eutils.*;
 import gov.nih.nlm.ncbi.www.soap.eutils.EFetchPubmedServiceStub.AbstractTextType;
 import gov.nih.nlm.ncbi.www.soap.eutils.EFetchPubmedServiceStub.ArticleType;
 public class PubMedCitationRetriever
 {
 
-	private static StringBuilder OUT = new StringBuilder();
+	//private static StringBuilder OUT = new StringBuilder();
+	private static StringBuffer OUT = new StringBuffer();
 	//private static PrintStream OUT;
 	private static int noOfArticles;
 
@@ -16,7 +19,7 @@ public class PubMedCitationRetriever
 	static String[] ids = { "" };
 
 
-	public static StringBuilder getPredications(String query,int number)
+	public static StringBuffer getPredications(String query,int number)
 	{
 		try
 		{
@@ -40,11 +43,12 @@ public class PubMedCitationRetriever
 
 		catch (Exception e) { System.out.append(e.toString()); 
 		}
-		StringBuilder ps = printCitations(ids);
+		StringBuffer ps = printCitations(ids);
 		return ps;
 	}
 
-	public static StringBuilder getAllPredications(String query)
+	@Deprecated
+	public static StringBuffer getPredications()
 	{
 		try
 		{
@@ -52,7 +56,7 @@ public class PubMedCitationRetriever
 
 			EUtilsServiceStub.ESearchRequest req = new EUtilsServiceStub.ESearchRequest();
 			req.setDb("pubmed");
-			req.setTerm(query);
+			req.setTerm("");
 			req.setRetMax("10");
 
 			EUtilsServiceStub.ESearchResult res = service.run_eSearch(req);
@@ -84,19 +88,31 @@ public class PubMedCitationRetriever
 		}
 		catch (Exception e) { System.out.println(e.toString()); 
 		}
-
-		StringBuilder ps = printCitations(fetcharray);
-
+		StringBuffer ps = printCitations(fetcharray);
 		return ps;
 	}
 
-	public static StringBuilder printCitations(String[] pmidList){
+	public static StringBuffer getPredications(String query)
+	{
+		PubMedGetPMID pgp = new PubMedGetPMID();
+		System.out.println("------------------------------------------------------------------------------------");
+		System.out.println("Getting PMID List");
+		String[] pmids = pgp.getPmidsForKeyword(query,"pubmed", "150000");
+
+		System.out.println("Total number of citations for query : "+ pmids.length);
+		StringBuffer OUT = printCitations(pmids);
+		return OUT;
+	}
+
+	public static StringBuffer printCitations(String[] pmidList){
 
 		try
 		{
 			EFetchPubmedServiceStub service = new EFetchPubmedServiceStub();
 			EFetchPubmedServiceStub.EFetchRequest req = new EFetchPubmedServiceStub.EFetchRequest();
 
+			System.out.println("------------------------------------------------------------------------------------");
+			System.out.println("Getting PubMed Article for each ciations");
 			for(int i = 0 ; i<pmidList.length;i++){
 				req.setId(pmidList[i]);
 
@@ -126,10 +142,28 @@ public class PubMedCitationRetriever
 					} 
 				}
 			}
+			System.out.println("Got all articles");
 		}
 		catch (Exception e) { 
 			e.printStackTrace(); 
 		}
 		return OUT;
 	}
+
+	//	public static void main(String[] args) throws IOException {
+	//		PubMedCitationRetriever pm = new PubMedCitationRetriever();
+	//		String query="Testosterone[mh] AND prolactin AND sleep [mh] ";
+	//		
+	//		String result = getPredications(query).toString();
+	//				try {
+	//					FileWriter fw = new FileWriter("test.txt");
+	//					BufferedWriter bw = new BufferedWriter(fw);
+	//					bw.write(result);
+	//		
+	//					bw.close();
+	//				} catch (IOException e) {
+	//					System.err.print("Unable to write to file ");
+	//					e.printStackTrace();
+	//				}
+	//	}
 }
