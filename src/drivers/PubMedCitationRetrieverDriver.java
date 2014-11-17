@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,28 +37,33 @@ public class PubMedCitationRetrieverDriver {
 			e.printStackTrace();
 		}
 
-		String file, topic;
+		String file = null, topic;
 		PubMedCitationRetriever pm = new PubMedCitationRetriever();
 		for(int i = 0 ; i<diseases.size();i++){
 			topic = diseases.get(i);
 			query = topic+Constants.SIMPLE_MESH_HEADINGS;
-			System.out.println(query);
-			FileWriter fw = null;
+			System.out.println("\nPubMed Query : "+query);
+
+			file =filegen.setFilename(query, topic);
+
+
+			StringBuffer ps = PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS);
+			//StringBuffer ps = PubMedCitationRetriever.getPredications(query);
+
+			System.out.println("------------------------------------------------------------------------------------");
+			System.out.println("Writing to file : " + file);
 			try {
-				file =filegen.setFilename(query, topic);
-				System.out.println("Write to file : "+file);
-				
-				fw = new FileWriter(Constants.TOPIC_DISEASE_FILE+file,false);
+				FileWriter fw = new FileWriter(Constants.TOPIC_DISEASE_FILE+file);
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(ps.toString());
+
+				bw.close();
 			} catch (IOException e) {
+				System.err.print("Unable to write to file ");
 				e.printStackTrace();
 			}
-			PrintWriter pw = new PrintWriter(fw,false);
-			StringBuilder ps = PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS);
-			pw.write(ps.toString());
-			pw.flush();
-			pw.close();
 			break;
-
 		}
 	}
 }
+
