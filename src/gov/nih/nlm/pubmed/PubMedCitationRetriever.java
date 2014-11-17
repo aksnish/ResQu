@@ -4,7 +4,6 @@ package gov.nih.nlm.pubmed;
 import gov.nih.nlm.ncbi.www.soap.eutils.*;
 import gov.nih.nlm.ncbi.www.soap.eutils.EFetchPubmedServiceStub.AbstractTextType;
 import gov.nih.nlm.ncbi.www.soap.eutils.EFetchPubmedServiceStub.ArticleType;
-import gov.nih.nlm.utils.Constants;
 public class PubMedCitationRetriever
 {
 
