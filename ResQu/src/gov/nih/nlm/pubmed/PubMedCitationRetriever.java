@@ -6,6 +6,7 @@ import java.util.SortedSet;
 import gov.nih.nlm.ncbi.www.soap.eutils.*;
 import gov.nih.nlm.ncbi.www.soap.eutils.EFetchPubmedServiceStub.AbstractTextType;
 import gov.nih.nlm.ncbi.www.soap.eutils.EFetchPubmedServiceStub.ArticleType;
+import gov.nih.nlm.utils.Constants;
 public class PubMedCitationRetriever
 {
 
@@ -26,7 +27,7 @@ public class PubMedCitationRetriever
 			EUtilsServiceStub service = new EUtilsServiceStub();
 
 			EUtilsServiceStub.ESearchRequest req = new EUtilsServiceStub.ESearchRequest();
-			req.setDb("pubmed");
+			req.setDb(Constants.PUBMED);
 			req.setTerm(query);
 			req.setRetMax(Integer.toString(number));
 
@@ -55,7 +56,7 @@ public class PubMedCitationRetriever
 			EUtilsServiceStub service = new EUtilsServiceStub();
 
 			EUtilsServiceStub.ESearchRequest req = new EUtilsServiceStub.ESearchRequest();
-			req.setDb("pubmed");
+			req.setDb(Constants.PUBMED);
 			req.setTerm("");
 			req.setRetMax("10");
 
@@ -75,7 +76,7 @@ public class PubMedCitationRetriever
 		{
 			EUtilsServiceStub service = new EUtilsServiceStub();
 			EUtilsServiceStub.ELinkRequest req = new EUtilsServiceStub.ELinkRequest();
-			req.setDb("pubmed");
+			req.setDb(Constants.PUBMED);
 			req.setId(ids);
 			EUtilsServiceStub.ELinkResult res = service.run_eLink(req);
 
@@ -97,7 +98,7 @@ public class PubMedCitationRetriever
 		PubMedGetPMID pgp = new PubMedGetPMID();
 		System.out.println("------------------------------------------------------");
 		System.out.println("Getting PMID List");
-		String[] pmids = pgp.getPmidsForKeyword(query,"pubmed", "150000");
+		String[] pmids = pgp.getPmidsForKeyword(query,Constants.PUBMED, Constants.MAX_NUMBER);
 
 		System.out.println("Total number of citations for query : "+ pmids.length);
 		StringBuffer OUT = printCitations(pmids);
