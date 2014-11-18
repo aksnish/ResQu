@@ -2,7 +2,6 @@ package gov.nih.nlm.pubmed;
 /*
 ===========================================================================
  *
-
  *                            PUBLIC DOMAIN NOTICE                          
  *               National Center for Biotechnology Information
  *         Lister Hill National Center for Biomedical Communications
@@ -53,18 +52,12 @@ package gov.nih.nlm.pubmed;
  * @version	1.0, September 18, 2006
  **/
 
-
 import java.io.*;
-
 import gov.nih.nlm.nls.skr.*;
 import gov.nih.nlm.utils.Constants;
 
 public class SemRepPubMedCitations
 {
-
-
-
-	/** print information about server options */
 	public static void printHelp() {
 		System.out.println("usage: GenericBatchUser [options] inputFilename");
 		System.out.println("  allowed options: ");
@@ -91,9 +84,7 @@ public class SemRepPubMedCitations
 
 	public String getSemrepedDocuments(String inputBuf)
 	{
-
 		String results = null;
-
 		String batchCommand = Constants.DEFAULT_COMMAND;
 		String batchNotes = "SKR API Test";
 		boolean silentEmail = false;
@@ -103,48 +94,34 @@ public class SemRepPubMedCitations
 		int priority = -1;
 
 		GenericObject myGenericObj = new GenericObject(Constants.UTS_USER_NAME, Constants.UTS_PASSWORD);
-
 		myGenericObj.setField("Email_Address", Constants.EMAIL);
 		fatalMessageIfEmptyString(batchCommand, "command for batch processing is required.");
-
 		myGenericObj.setField("Batch_Command", batchCommand);
-
 		if (batchNotes != null) {
 			myGenericObj.setField("BatchNotes", batchNotes);
 		}
 		myGenericObj.setField("SilentEmail", silentEmail);
-
 		if (silentOnErrors) {
 			myGenericObj.setField("ESilent", silentOnErrors);
 		}
-
 		if (singleLineDelimitedInput) {
 			myGenericObj.setField("SingLine", singleLineDelimitedInput);
 		}
-
 		if (singleLineDelimitedInputWithId) {
 			myGenericObj.setField("SingLinePMID", singleLineDelimitedInputWithId);
 		}
-
 		if (priority > 0) {
 			myGenericObj.setField("RPriority", Integer.toString(priority));
 		}
-
-
 		if (inputBuf .length() > 0) {
 			File inFile = new File(inputBuf.toString().trim()); 
 			if (inFile.exists()) {
 				myGenericObj.setFileField("UpLoad_File", inputBuf.toString().trim());
 			}
 		}
-
 		try
 		{
 			results = myGenericObj.handleSubmission();
-			//System.out.print(results);
-
-
-
 		} catch (RuntimeException ex) {
 			System.err.println("");
 			System.err.print("An ERROR has occurred while processing your");
