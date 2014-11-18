@@ -1,5 +1,8 @@
 package drivers;
 
+import java.util.Set;
+
+import net.htmlparser.jericho.HTMLElements;
 import gov.nih.nlm.crawler.ACPCrawler;
 
 public class ACPCrawlerDriver {
@@ -10,5 +13,11 @@ public class ACPCrawlerDriver {
 		
 		ACPCrawler crawler = new ACPCrawler();
 		crawler.crawl(startPage);
+		
+		HTMLElements elements = null;
+		Set<String> blockTags =  elements.getBlockLevelElementNames();
+		
+	
+		
 	}
 }
