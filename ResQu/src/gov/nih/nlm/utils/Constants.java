@@ -9,13 +9,14 @@ public class Constants {
 	public static final String SIMPLE_EXTENSION="_S";
 	public static final String COMPLEX_EXTENSION="_C";
 	public static final int  NO_OF_CITATIONS = 500;
+	public static final String MAX_NUMBER = "150000";
 	
 	
 	public static final String EMAIL = "nishita@knoesis.org";
 	public static final String UTS_USER_NAME = "aksnish11";
 	public static final String UTS_PASSWORD ="$Nih2014";
 	public static String DEFAULT_COMMAND = "semrep -D -E";
-	public static String METAMAP_COMMAND = "metamap -J dsyn,fndg,inpo,phsu -E";
+	public static String METAMAP_COMMAND = "metamap -J -I dsyn,fndg,inpo,phsu -E";
 
 	public static final String QUERY = "";
 	public static final String DATA_FOLDER = "data/";
