@@ -17,6 +17,7 @@ public class UniqueNodes {
 
 	public void createNodespace() throws IOException {
 		GraphDatabaseService graphDb = new GraphDatabaseFactory().newEmbeddedDatabase( "db/graphDB" );
+
 		try (Transaction tx = graphDb.beginTx()) {
 
 			FileReader fr = new FileReader("RelTypes");
@@ -50,13 +51,12 @@ public class UniqueNodes {
 
 			tx.success();
 		}
-
 	}
-	
+
 	public static void main (String args []) throws IOException{
-		
-	UniqueNodes un = new UniqueNodes();
-	un.createNodespace();
-		
+
+		UniqueNodes un = new UniqueNodes();
+		un.createNodespace();
+
 	}
 }
