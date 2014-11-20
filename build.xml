@@ -93,6 +93,12 @@
                     <param name="class.name" value="drivers.SemRepPubMedCitationsDriver" />
             </antcall>
     </target>
+
+          <target name="neo4j-driver" description="run the Legal Spans MDFS">
+            <antcall target="run-class">
+                    <param name="class.name" value="drivers.Neo4jDriver" />
+            </antcall>
+    </target>
 	
 		<target name="run-class" description="run given class">
 
