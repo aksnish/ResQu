@@ -17,10 +17,10 @@ public class SimpleJericho {
 
 	//static String htmlText = "<meter value=\"2\" min=\"0\" max=\"10\">2 out of 10</meter><br><meter value=\"0.6\">60%</meter>";
 
-	static String startPage = "http://online.statref.com.ezproxy.libraries.wright.edu:2048/Document.aspx?docAddress=PFf7_HGpSzDVHbL5IgmBtw%3d%3d&SessionId=1E67164QYOIMOWXV";
+	static String startPage = "http://online.statref.com.ezproxy.libraries.wright.edu:2048/Document.aspx?FxId=539&SessionID=1E78E43GMGISTWWS#H&0&ChaptersTab&95uax5V0Y2R40OdOPr3SFg%3d%3d&&539";
 
 
-	public static void main(String[] args) throws Exception {
+	public void crawlURL() throws Exception {
 				URL url = new URL(startPage);
 				URLConnection conn = url.openConnection();
 				conn.setRequestProperty("User-agent", Constants.USER_AGENT);
