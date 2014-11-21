@@ -100,6 +100,12 @@
             </antcall>
     </target>
 	
+	 <target name="jericho-driver" description="run the Legal Spans MDFS">
+	            <antcall target="run-class">
+	                    <param name="class.name" value="drivers.ACPCrawlerDriver" />
+	            </antcall>
+	    </target>
+	
 		<target name="run-class" description="run given class">
 
                 <property name="class.name" value="" />
