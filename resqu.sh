@@ -3,19 +3,19 @@ start=$(date +"%s")
 echo "------------------------------------------"
 echo "STEP1: GETTING 500 CITATIONS FROM MEDLINE..."
 echo "------------------------------------------"
-ant compile citation-driver
+#ant compile citation-driver
 echo "------------------------------------------"
 
 echo "------------------------------------------"
 echo "STEP2: SEMREP THE MEDLINECITATIONS..."
 echo "------------------------------------------"
-ant compile semrep-driver
+#ant compile semrep-driver
 echo "------------------------------------------"
 
 echo "------------------------------------------"
 echo "STEP3: SUMMARIZING THE SEMREPED CITATIONS..."
 echo "------------------------------------------"
-./sum-script.sh
+#./sum-script.sh
 echo "------------------------------------------"
 
 
@@ -23,7 +23,7 @@ echo "------------------------------------------"
 echo "------------------------------------------"
 echo "STEP4: NEO4J STUFF..."
 echo "------------------------------------------"
-ant compile neo4j-driver
+#ant compile neo4j-driver
 echo "------------------------------------------"
 
 echo "------------------------------------------"
