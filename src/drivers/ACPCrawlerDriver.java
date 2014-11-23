@@ -15,19 +15,15 @@ public class ACPCrawlerDriver {
 
 	static PrintStream OUT;
 
-
 	public static void main(String[] args) throws Exception {
-
+		String abs_elements = null;
 		//OUT = System.out;
-
 		File folder = new File("data/jericho/");
 		File[] listOfFiles = folder.listFiles();
 
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
-				//System.out.println(file.getName());
 				String filename = Constants.METAMAP_FOLDER_PATH+file.getName();
-
 				OUT = new PrintStream(new File(filename));
 				List<Tag> fontTagList = new ArrayList<Tag>();
 				ClinicalResourceCrawler crawl = new ClinicalResourceCrawler();
@@ -39,8 +35,6 @@ public class ACPCrawlerDriver {
 
 				int startIndex= crawl.getBoldTextIndex(startPage,"Uses");
 				int endIndex= crawl.getBoldTextIndex(startPage,"Dosage and Administration");
-
-				String abs_elements = null;
 
 				fontTagList = crawl.findFontBetween(startPage, startIndex,endIndex);
 				OUT.append("\nPMID  - " +1);
