@@ -8,6 +8,7 @@ public class Neo4jDriver {
 	
 	public static void main (String args []) throws IOException{
 
+		System.out.println("Start");
 		UniqueNodes un = new UniqueNodes();
 		un.createNodespace();
 
