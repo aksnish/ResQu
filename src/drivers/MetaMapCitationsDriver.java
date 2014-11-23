@@ -7,7 +7,7 @@ public class MetaMapCitationsDriver {
 	public static void main(String[] args) {
 		
 		MetaMapConverter mc = new MetaMapConverter();
-		String results = mc.getMetaMapFormat("data/disease/Migraine_Disorders_S");
+		String results = mc.getMetaMapFormat("jericho/jeri-out.txt");
 		System.out.println(results);
 
 	}
