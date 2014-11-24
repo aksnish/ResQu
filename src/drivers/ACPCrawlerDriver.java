@@ -23,11 +23,11 @@ public class ACPCrawlerDriver {
 
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
+				System.out.println("Files: "+ file.getName());
 				String filename = Constants.METAMAP_FOLDER_PATH+file.getName();
 				OUT = new PrintStream(new File(filename));
 				List<Tag> fontTagList = new ArrayList<Tag>();
 				ClinicalResourceCrawler crawl = new ClinicalResourceCrawler();
-				//String startPage ="file:"+file.getName();//jericho/Acetominophen.html";
 
 				String startPage =Constants.CRAWLER_FILE_PREFIX+Constants.CRAWLER_DATA_FOLDER_PATH+file.getName();
 
