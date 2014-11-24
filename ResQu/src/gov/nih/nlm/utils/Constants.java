@@ -16,7 +16,8 @@ public class Constants {
 	public static final String UTS_USER_NAME = "aksnish11";
 	public static final String UTS_PASSWORD ="$Nih2014";
 	public static String DEFAULT_COMMAND = "semrep -D -E";
-	public static String METAMAP_COMMAND = "metamap -J -I -r dsyn,fndg,inpo,phsu -E";
+	public static String METAMAP_ALL_OPTIONS = "metamap -b";
+	public static String METAMAP_COMMAND = "metamap -J -I -Y dsyn,fndg,inpo,phsu";
 
 	public static final String QUERY = "";
 	public static final String DATA_FOLDER = /*"/usr/share/data/resqu/data/" ;*/  "data/";
