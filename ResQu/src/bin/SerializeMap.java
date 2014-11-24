@@ -63,6 +63,11 @@ public class SerializeMap {
 			ioe.printStackTrace();
 		}
 		deSerialize();
+		
+//		String test = "Sensitivity (Antimicrobial susceptibility) [Finding]";
+//		//String [] list =  test.split("[");
+//		String list =  test.replaceAll("\\(.*\\)", "").replaceAll("\\[.*\\]","");
+//		System.out.println(list);//+list[1]);
 	}
 
 }

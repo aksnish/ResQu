@@ -71,7 +71,7 @@ public class MetaMapWriter {
 
 					String [] mapterms = (split[2]).split(":");
 					for(int j = 0 ; j < mapterms.length;j++){
-						
+						mapterms[1] = (mapterms[1]).replaceAll("\\(.*\\)", "").replaceAll("\\[.*\\]","");
 						myVector.put(mapterms[0], mapterms[1]);
 					}
 				}
