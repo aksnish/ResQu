@@ -15,9 +15,9 @@ public class Constants {
 	public static final String EMAIL = "nishita@knoesis.org";
 	public static final String UTS_USER_NAME = "aksnish11";
 	public static final String UTS_PASSWORD ="$Nih2014";
-	public static String DEFAULT_COMMAND = "semrep -D -E";
-	public static String METAMAP_ALL_OPTIONS = "metamap -b";
-	public static String METAMAP_COMMAND = "metamap -J -I -Y dsyn,fndg,inpo,phsu";
+	public static final String DEFAULT_COMMAND = "semrep -D -E";
+	public static final String METAMAP_ALL_OPTIONS = "metamap -b";
+	public static final String METAMAP_COMMAND = "metamap -J -I -Y dsyn,fndg,inpo,phsu";
 
 	public static final String QUERY = "";
 	public static final String DATA_FOLDER = /*"/usr/share/data/resqu/data/" ;*/  "data/";
@@ -32,6 +32,10 @@ public class Constants {
 	public static final String CRAWLER_DATA_FOLDER="jericho/";
 	public static final String CRAWLER_DATA_FOLDER_PATH =DATA_FOLDER+CRAWLER_DATA_FOLDER;
 
-	public static final String METAMAP_FOLDER = "metamap/";
-	public static final String METAMAP_FOLDER_PATH =DATA_FOLDER+METAMAP_FOLDER;
+	public static final String METAMAP_INPUT_FOLDER = "metamap-input/";
+	public static final String METAMAP_INPUT_FOLDER_PATH =DATA_FOLDER+METAMAP_INPUT_FOLDER;
+	public static final String METAMAP_OUTPUT_FOLDER = "metamap-output/";
+	public static final String METAMAP_OUTPUT_FOLDER_PATH =DATA_FOLDER+METAMAP_OUTPUT_FOLDER;
+	
+	public static final String SERIALZED_MAPS_FOLDER = DATA_FOLDER+"serializedMaps/";
 }
