@@ -24,8 +24,8 @@ public class ACPCrawlerDriver {
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
 				System.out.println("Files: "+ file.getName());
-				String filename = Constants.METAMAP_FOLDER_PATH+file.getName();
-				OUT = new PrintStream(new File(filename));
+				String filename = Constants.METAMAP_INPUT_FOLDER_PATH+file.getName();
+				OUT = new PrintStream(new File(filename.replaceAll(".html", "_indications.txt")));
 				List<Tag> fontTagList = new ArrayList<Tag>();
 				ClinicalResourceCrawler crawl = new ClinicalResourceCrawler();
 
@@ -37,30 +37,29 @@ public class ACPCrawlerDriver {
 				int endIndex= crawl.getBoldTextIndex(startPage,"Dosage and Administration");
 
 				fontTagList = crawl.findFontBetween(startPage, startIndex,endIndex);
-				OUT.append("\nPMID  - " +1);
+				OUT.append("PMID  - " +101254);
 				OUT.append("\nTI  - " +"title");
 				OUT.append("\nAB  - " );
 				for(Tag font : fontTagList){
 					if(("•").equalsIgnoreCase(abs_elements))
 						continue;
 					abs_elements = font.getElement().getTextExtractor().toString();
-					OUT.append(abs_elements.replaceAll("[^\\x00-\\x7F]", "")+"\n");
+					OUT.append(abs_elements.replaceAll("[^\\x00-\\x7F]", "")+"\n\n");
 				}
 
 				startIndex= crawl.getBoldTextIndex(startPage,"Cautions");
 				endIndex= crawl.getBoldTextIndex(startPage,"Interactions");
 				fontTagList = crawl.findFontBetween(startPage, startIndex,endIndex);
 
-				OUT = new PrintStream(new File(filename.replaceAll("html", "txt")));
-				OUT.append("\nPMID  - " +1);
+				OUT = new PrintStream(new File(filename.replaceAll(".html", "_adverse_effects.txt")));
+				OUT.append("PMID  - " +101254);
 				OUT.append("\nTI  - " +"title");
 				OUT.append("\nAB  - " );
-
 				for(Tag font : fontTagList){
 					abs_elements = font.getElement().getTextExtractor().toString();
 					if(("•").equalsIgnoreCase(abs_elements))
 						continue;
-					OUT.append(abs_elements.replaceAll("[^\\x00-\\x7F]", "")+"\n");
+					OUT.append(abs_elements.replaceAll("[^\\x00-\\x7F]", "")+"\n\n");
 				}
 			}
 		}
