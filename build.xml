@@ -94,9 +94,9 @@
             </antcall>
     </target>
 
-	<target name="triple-extractor-driver" description="run the Legal Spans MDFS">
+	<target name="triple-extractor-driver" description="Triple Builder to obtain triples from semrep output">
             <antcall target="run-class">
-                    <param name="class.name" value="drivers.SemRepTripleExtractorDriver" />
+                    <param name="class.name" value="drivers.TripleBuilderDriver" />
             </antcall>
     </target>
 	

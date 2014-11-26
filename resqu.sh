@@ -7,19 +7,19 @@ echo "------------------------------------------"
 echo "------------------------------------------"
 
 echo "------------------------------------------"
-echo "STEP2: SEMREP THE MEDLINECITATIONS..."
+echo "STEP2: SEMREPPING THE MEDLINE CITATIONS..."
 echo "------------------------------------------"
 #ant compile semrep-driver
 echo "------------------------------------------"
 
 echo "------------------------------------------"
-echo "STEP3: SUMMARIZING THE SEMREPED CITATIONS."
+echo "STEP3: SUMMARIZING THE SEMREPED MEDLINE CITATIONS."
 echo "------------------------------------------"
 ./sum-script.sh
 echo "------------------------------------------"
 
 echo "-----------------------------------------------------"
-echo "STEP4: EXTRACT TRIPLES FROM THE SUMMARIZED DOCUMENTS."
+echo "STEP4: EXTRACTING TRIPLES FROM THE SUMMARIZED DOCUMENTS."
 echo "-----------------------------------------------------"
 ant compile triple-extractor-driver
 echo "-----------------------------------------------------"
@@ -31,13 +31,13 @@ echo "------------------------------------------"
 echo "------------------------------------------"
 
 echo "------------------------------------------"
-echo "STEP6: JERICHO CRAWLING..."
+echo "STEP6: GETTING GOLD STANDARD DATA USING JERICHO HTML CRAWLER..."
 echo "------------------------------------------"
 #ant compile jericho-driver
 echo "------------------------------------------"
 
 echo "------------------------------------------"
-echo "STEP7: METAMAP THE CRAWLED DATA..."
+echo "STEP7: METAMAPPING THE CRAWLED DATA..."
 echo "------------------------------------------"
 #ant compile metamap-driver
 echo "------------------------------------------"
