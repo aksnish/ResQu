@@ -9,7 +9,7 @@ echo "------------------------------------------"
 echo "------------------------------------------"
 echo "STEP2: SEMREPPING THE MEDLINE CITATIONS..."
 echo "------------------------------------------"
-#ant compile semrep-driver
+#ant compile predication-extractor-driver
 echo "------------------------------------------"
 
 echo "------------------------------------------"
@@ -21,7 +21,7 @@ echo "------------------------------------------"
 echo "-----------------------------------------------------"
 echo "STEP4: EXTRACTING TRIPLES FROM THE SUMMARIZED DOCUMENTS."
 echo "-----------------------------------------------------"
-ant compile triple-extractor-driver
+ant compile predication-builder-driver
 echo "-----------------------------------------------------"
 
 echo "------------------------------------------"
