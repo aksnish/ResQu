@@ -7,8 +7,8 @@ import gov.nih.nlm.utils.Constants;
 
 public class SemRepTripleExtractorDriver {
 
-
 	public static void main(String[] args) {
+
 		SemrepTripleExtractor semrep = new SemrepTripleExtractor();
 		File directory = new File(Constants.SEMREP_FOLDER);
 		File[] directoryListing = directory.listFiles();

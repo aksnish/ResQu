@@ -1,13 +1,11 @@
 package gov.nih.nlm.semrep.utils;
 
-import java.io.File;
 import java.io.PrintWriter;
-import java.util.Set;
 
 /***
  * This class reads the SemRep output from the SKR API
  * that uses SemRep to parse the input text, and produces
- * and flat file of all predications in the input text
+ * a flat file of all predications in the input text
  */
 
 public class SemrepTripleExtractor {
@@ -17,8 +15,7 @@ public class SemrepTripleExtractor {
 		Predication pred = new Predication();
 		String preferred_name = outputFile.replaceAll("_S", " ").replaceAll("_", " ");
 		preferred_name = preferred_name.substring(preferred_name.indexOf("/")+1, preferred_name.length());
-		//System.out.println(preferred_name);
-
+		
 		FlatFileContentIterator ffcit = new FlatFileContentIterator(inputFile);
 		try{
 
@@ -34,23 +31,17 @@ public class SemrepTripleExtractor {
 					continue;
 				}
 				if(line.contains("|")){
-
 					String subject = pred.getSubject(line);
 					String predicate = pred.getPredicate(line);
 					String object = pred.getObject(line);
-					//if(predicate.equals("TREATS")&&object.equals("Migraine Disorders")){
 					serialize(subject, predicate, object, out);
-					//}
-					//else
-					//{
-					//}
 				}
 			}
 			ffcit.close();
 			out.close();
 		}
 		catch (Exception e){
-
+			//FIXME - shouldnt you print a stacktrace?
 		}
 	}
 
@@ -58,9 +49,5 @@ public class SemrepTripleExtractor {
 		String delimeter = "-";
 		out.println(subject+delimeter+predicate+delimeter+object);
 	}
-	
-//	public static void main(String[] args) {
-//		SemrepTripleExtractor sm = new SemrepTripleExtractor();
-//		sm.getFilePredications("data/semrep/Sleeplessness_S.semrep", "data/se.txt");
-//	}
+
 }
