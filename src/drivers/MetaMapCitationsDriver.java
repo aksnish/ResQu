@@ -35,10 +35,11 @@ public class MetaMapCitationsDriver {
 				filename= Constants.METAMAP_OUTPUT_FOLDER_PATH+file.getName();
 				System.out.println("output file name  :"+ filename);				
 				String inputBuf = Constants.METAMAP_INPUT_FOLDER_PATH+file.getName();
-				String results =mc.getMetaMapFormat(inputBuf);
-				writeMetaMapToFile(results, filename);
+				//String results =mc.getMetaMapFormat(inputBuf);
+				//writeMetaMapToFile(results, filename);
 			}
 		}
+		serializeHashMap(Constants.METAMAP_OUTPUT_FOLDER_PATH);
 	}
 
 	/**
@@ -116,7 +117,7 @@ public class MetaMapCitationsDriver {
 				fos.close();
 			}
 		}
-		//deSerialize();
+		deSerialize();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

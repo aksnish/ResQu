@@ -21,20 +21,19 @@ public class SemRepPubMedCitationsDriver {
 		String filename;
 		String results;
 		PrintWriter writer;
-
 		File directory = new File(Constants.TOPIC_DISEASE_FILE);
 		File[] directoryListing = directory.listFiles();
 		if (directoryListing != null) {
 			for (File file : directoryListing) {
-				
+
 				filename = filegen.normalizeFileName(file.toString());
-				
+
 				System.out.println("----------------------");
-				System.out.println("ConvertigPubMed Citations to SemRep format");
+				System.out.println("Converting PubMed Citations to SemRep format");
 				results = pubSem.getSemrepedDocuments(file.toString());
-//				writer = new PrintWriter(Constants.SEMREP_FOLDER+ filename +".semrep");
-//				writer.write(results);
-				
+				//				writer = new PrintWriter(Constants.SEMREP_FOLDER+ filename +".semrep");
+				//				writer.write(results);
+
 				System.out.println("Writing to file : "+filename);
 				try {
 					FileWriter fw = new FileWriter(Constants.SEMREP_FOLDER+ filename +".semrep");
@@ -46,7 +45,7 @@ public class SemRepPubMedCitationsDriver {
 					System.err.print("Unable to write to file ");
 					e.printStackTrace();
 				}
-				break;
+				//break;
 			}
 		}else {
 			System.out.println("not a directory");

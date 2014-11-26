@@ -36,8 +36,6 @@ public class PubMedCitationRetrieverDriver {
 			file =Constants.TOPIC_DISEASE_FILE+filegen.setFilename(query, topic);
 			PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS, file);
 			System.out.println("------------------------------------------------------");
-			System.out.println("Writing to file : " + file);
-			//writeMetaMapToFile(ps, file);
 		}
 		br.close();
 	}
