@@ -22,9 +22,11 @@ public class Constants {
 	public static final String QUERY = "";
 	public static final String DATA_FOLDER = /*"/usr/share/data/resqu/data/" ;*/  "data/";
 	public static final String DISEASE_LIST=DATA_FOLDER+"disease_topic_list.txt";
-	public static final String TOPIC_DISEASE_FILE = DATA_FOLDER+"disease/";
+	public static final String TOPIC_DISEASE_FOLDER = DATA_FOLDER+"disease/";
 	public static final String TOPIC_DRUG_FILE = DATA_FOLDER+"drug/";
 	public static final String SEMREP_FOLDER = DATA_FOLDER+"semrep/";
+	
+	public static final String SUMMARIZE_FOLDER = DATA_FOLDER+"summarized-triples/";
 	public static final String USER_AGENT = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.11) Gecko/2009060215 Firefox/3.0.11 GTB6 (.NET CLR 3.5.30729)";
 
 
