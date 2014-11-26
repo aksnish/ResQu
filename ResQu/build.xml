@@ -94,6 +94,12 @@
             </antcall>
     </target>
 
+	<target name="triple-extractor-driver" description="run the Legal Spans MDFS">
+            <antcall target="run-class">
+                    <param name="class.name" value="drivers.SemRepTripleExtractorDriver" />
+            </antcall>
+    </target>
+	
           <target name="neo4j-driver" description="run the Legal Spans MDFS">
             <antcall target="run-class">
                     <param name="class.name" value="drivers.Neo4jDriver" />
