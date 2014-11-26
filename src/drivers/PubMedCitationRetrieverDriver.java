@@ -2,7 +2,7 @@ package drivers;
 
 import gov.nih.nlm.pubmed.PubMedCitationRetriever;
 import gov.nih.nlm.pubmed.SemRepPubMedCitations;
-import gov.nih.nlm.semrep.utils.SemrepTripleExtractor;
+import gov.nih.nlm.semrep.utils.TripleBuilder;
 import gov.nih.nlm.utils.Constants;
 import gov.nih.nlm.utils.FilenameGenerator;
 import java.io.BufferedReader;
