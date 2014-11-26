@@ -22,19 +22,26 @@ Configuration
 
 Data:
 	- All data for the project are available on the knoesis-hpco server
-	- /usr/share/data/resqu/data/
+	- /usr/share/data/resqu/data/ (alias DATA_DIR)
+
+Aliases:
+--------
+	- DATA_DIR = /usr/share/data/resqu/data/
 
 Step 1
 ---------
 	- Manually specify a list of query terms whose summaries must be generated
-	- /data/disease_topic_list.txt
+	- $RESQU:/data/disease_topic_list.txt
+	- NB: For this initial application, we will use 
+		+ A list of 20 Diseases
+		+ A list of 20 Drugs
  
 Step 2
 ---------
-	- Get MEDLINE citations for the specified queries
-	- run src/drivers/PubMedCitationRetriever 
-	- INPUT: /data/disease_topic_list.txt
-	- OUTPUT: /data/disease/
+	- Get MEDLINE citations for the specified queries (i.e., Drugs and/or Diseases)
+	- run src/drivers/PubMedCitationRetriever.java
+	- INPUT: $DATA_DIR/disease_topic_list.txt
+	- OUTPUT: $DATA_DIR/data/disease/
 	- NB: Organize raw text according to prescribed MEDLINE format
 		UI - 10026156
 		TI - Not Available
