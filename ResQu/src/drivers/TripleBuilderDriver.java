@@ -2,14 +2,14 @@ package drivers;
 
 import java.io.File;
 
-import gov.nih.nlm.semrep.utils.SemrepTripleExtractor;
+import gov.nih.nlm.semrep.utils.TripleBuilder;
 import gov.nih.nlm.utils.Constants;
 
 public class TripleBuilderDriver {
 
 	public static void main(String[] args) {
 
-		SemrepTripleExtractor semrep = new SemrepTripleExtractor();
+		TripleBuilder semrep = new TripleBuilder();
 		File directory = new File(Constants.SEMREP_FOLDER);
 		File[] directoryListing = directory.listFiles();
 		String filename, outputFile;
