@@ -52,9 +52,9 @@
         <jar jarfile="${lib.home}/${app.name}.jar" basedir="${resqu.classes}"/>
 
 		<!-- Create one jar with all jar files -->
-        <zip destfile="${resqu.jar}/project.jar">
+        <!--<zip destfile="${resqu.jar}/project.jar">
                 <zipgroupfileset dir="${lib.home}" includes="*.jar"/>
-        </zip>
+        </zip>-->
 
   </target>
 	
