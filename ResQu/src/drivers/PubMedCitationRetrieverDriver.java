@@ -33,7 +33,7 @@ public class PubMedCitationRetrieverDriver {
 			topic = line;
 			query = topic+Constants.SIMPLE_MESH_HEADINGS;
 			System.out.println("PubMed Query : "+query);
-			file =Constants.TOPIC_DISEASE_FOLDER+filegen.setFilename(query, topic);
+			file = Constants.TOPIC_DISEASE_FOLDER+filegen.setFilename(query, topic);
 			PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS, file);
 			System.out.println("------------------------------------------------------");
 		}
