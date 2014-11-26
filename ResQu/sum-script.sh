@@ -1,7 +1,8 @@
 #!/bin/bash
 cd programs/
 #cd /home/nishita/Documents/Projects/Summarization-2012-SPA/bin/
-base_dir="/home/nishita/workspace/ResQu/data/semrep/"
+#base_dir="/home/nishita/workspace/ResQu/data/semrep/"
+base_dir="/usr/share/data/resqu/data/semrep/"
 base_dir_files="$base_dir*"
 for file in $base_dir_files
 do
