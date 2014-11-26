@@ -15,27 +15,32 @@ echo "------------------------------------------"
 echo "------------------------------------------"
 echo "STEP3: SUMMARIZING THE SEMREPED CITATIONS."
 echo "------------------------------------------"
-#./sum-script.sh
+./sum-script.sh
 echo "------------------------------------------"
 
+echo "-----------------------------------------------------"
+echo "STEP4: EXTRACT TRIPLES FROM THE SUMMARIZED DOCUMENTS."
+echo "-----------------------------------------------------"
+ant compile triple-extractor-driver
+echo "-----------------------------------------------------"
+
 echo "------------------------------------------"
-echo "STEP4: NEO4J STUFF..."
+echo "STEP5: NEO4J STUFF..."
 echo "------------------------------------------"
 #ant compile neo4j-driver
 echo "------------------------------------------"
 
 echo "------------------------------------------"
-echo "STEP5: JERICHO CRAWLING..."
+echo "STEP6: JERICHO CRAWLING..."
 echo "------------------------------------------"
-ant compile jericho-driver
-echo "------------------------------------------"
-
-echo "------------------------------------------"
-echo "STEP5: METAMAP THE CRAWLED DATA..."
-echo "------------------------------------------"
-ant compile metamap-driver
+#ant compile jericho-driver
 echo "------------------------------------------"
 
+echo "------------------------------------------"
+echo "STEP7: METAMAP THE CRAWLED DATA..."
+echo "------------------------------------------"
+#ant compile metamap-driver
+echo "------------------------------------------"
 
 end=$(date +"%s")
 rawextime=`expr $end - $start`
