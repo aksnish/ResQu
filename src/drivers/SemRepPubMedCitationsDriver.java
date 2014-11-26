@@ -21,7 +21,7 @@ public class SemRepPubMedCitationsDriver {
 		String filename;
 		String results;
 		PrintWriter writer;
-		File directory = new File(Constants.TOPIC_DISEASE_FILE);
+		File directory = new File(Constants.TOPIC_DISEASE_FOLDER);
 		File[] directoryListing = directory.listFiles();
 		if (directoryListing != null) {
 			for (File file : directoryListing) {

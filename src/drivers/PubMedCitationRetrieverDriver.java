@@ -33,7 +33,7 @@ public class PubMedCitationRetrieverDriver {
 			topic = line;
 			query = topic+Constants.SIMPLE_MESH_HEADINGS;
 			System.out.println("PubMed Query : "+query);
-			file =Constants.TOPIC_DISEASE_FILE+filegen.setFilename(query, topic);
+			file =Constants.TOPIC_DISEASE_FOLDER+filegen.setFilename(query, topic);
 			PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS, file);
 			System.out.println("------------------------------------------------------");
 		}
@@ -43,7 +43,7 @@ public class PubMedCitationRetrieverDriver {
 	public static void writeMetaMapToFile(String content, String filePath) throws IOException, ClassNotFoundException {
 		Writer writer = null;
 		try {
-			writer = new FileWriter("data/disease/"+filePath);
+			writer = new FileWriter(Constants.TOPIC_DISEASE_FOLDER+filePath);
 			writer.write(content);
 		} catch (IOException e) {	
 			System.err.println("Error writing the file : ");

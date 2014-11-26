@@ -17,8 +17,8 @@ public class SemRepTripleExtractorDriver {
 			for (File file : directoryListing) {
 				if(file.getName().endsWith("salient_predications"))
 				{
-					filename = "data/semrep/"+file.getName();
-					outputFile = "data/summarized-triples/"+file.getName();
+					filename = Constants.SEMREP_FOLDER+file.getName();
+					outputFile =Constants.SUMMARIZE_FOLDER+file.getName();
 					System.out.println("output file name : "+outputFile);
 					semrep.getFilePredications(filename, outputFile);
 
