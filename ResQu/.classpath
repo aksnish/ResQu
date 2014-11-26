@@ -112,7 +112,6 @@
 	<classpathentry kind="lib" path="lib/parboiled-core-1.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/parboiled-scala_2.10-1.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/rhino-1.7R4.jar"/>
-	<classpathentry kind="lib" path="lib/resqu.jar"/>
 	<classpathentry kind="lib" path="lib/geronimo-jta_1.1_spec-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/logback-access-1.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/logback-classic-1.1.2.jar"/>
