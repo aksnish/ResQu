@@ -5,7 +5,7 @@ import java.io.File;
 import gov.nih.nlm.semrep.utils.SemrepTripleExtractor;
 import gov.nih.nlm.utils.Constants;
 
-public class SemRepTripleExtractorDriver {
+public class TripleBuilderDriver {
 
 	public static void main(String[] args) {
 
