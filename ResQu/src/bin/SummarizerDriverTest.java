@@ -1,11 +1,11 @@
-package drivers;
+package bin;
 
 import java.io.File;
 import java.io.IOException;
 
 
 /*Script implemented in sum-script.sh */
-public class SummarizeDiver {
+public class SummarizerDriverTest {
 
 
 	public static void main(String[] args) throws IOException {
