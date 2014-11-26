@@ -19,7 +19,7 @@ echo "------------------------------------------"
 echo "------------------------------------------"
 
 echo "-----------------------------------------------------"
-echo "STEP4: EXTRACTING TRIPLES FROM THE SUMMARIZED DOCUMENTS."
+echo "STEP4: BUILDING PREDICATIONS FROM THE SUMMARIZED DOCUMENTS."
 echo "-----------------------------------------------------"
 ant compile predication-builder-driver
 echo "-----------------------------------------------------"
