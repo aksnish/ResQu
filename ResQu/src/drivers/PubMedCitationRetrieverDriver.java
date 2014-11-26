@@ -5,7 +5,6 @@ import gov.nih.nlm.pubmed.SemRepPubMedCitations;
 import gov.nih.nlm.semrep.utils.SemrepTripleExtractor;
 import gov.nih.nlm.utils.Constants;
 import gov.nih.nlm.utils.FilenameGenerator;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 
 @SuppressWarnings("unused")
@@ -22,47 +22,44 @@ public class PubMedCitationRetrieverDriver {
 
 	public static void main(String[] args) throws Exception
 	{
-
+		PubMedCitationRetriever pm = new PubMedCitationRetriever();
+		StringBuffer ps = new StringBuffer();
 		FilenameGenerator filegen = new FilenameGenerator();
 		BufferedReader br = new BufferedReader(new FileReader(Constants.DISEASE_LIST));
 		String line, query;
-
-		ArrayList<String> diseases = new ArrayList<String>();
-		try {
-			while((line = br.readLine())!= null)
-			{
-				diseases.add(line);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		String file = null, topic;
-		PubMedCitationRetriever pm = new PubMedCitationRetriever();
-		for(int i = 0 ; i<diseases.size();i++){
-			topic = diseases.get(i);
+		while((line = br.readLine())!= null)
+		{
+			topic = line;
 			query = topic+Constants.SIMPLE_MESH_HEADINGS;
 			System.out.println("PubMed Query : "+query);
-
-			file =filegen.setFilename(query, topic);
-
-
-			StringBuffer ps = PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS);
-			//StringBuffer ps = PubMedCitationRetriever.getPredications(query);
-
+			file =Constants.TOPIC_DISEASE_FILE+filegen.setFilename(query, topic);
+			PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS, file);
 			System.out.println("------------------------------------------------------");
 			System.out.println("Writing to file : " + file);
-			try {
-				FileWriter fw = new FileWriter(Constants.TOPIC_DISEASE_FILE+file);
-				BufferedWriter bw = new BufferedWriter(fw);
-				bw.write(ps.toString());
+			//writeMetaMapToFile(ps, file);
+		}
+		br.close();
+	}
 
-				bw.close();
-			} catch (IOException e) {
-				System.err.print("Unable to write to file ");
-				e.printStackTrace();
+	public static void writeMetaMapToFile(String content, String filePath) throws IOException, ClassNotFoundException {
+		Writer writer = null;
+		try {
+			writer = new FileWriter("data/disease/"+filePath);
+			writer.write(content);
+		} catch (IOException e) {	
+			System.err.println("Error writing the file : ");
+			e.printStackTrace();
+		} finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
+					System.err.println("Error closing the file : ");
+					e.printStackTrace();
+				}
 			}
-			break;
+
 		}
 	}
 }
