@@ -1,6 +1,12 @@
 package gov.nih.nlm.pubmed;
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.SortedSet;
 
 import gov.nih.nlm.ncbi.www.soap.eutils.*;
@@ -11,7 +17,8 @@ public class PubMedCitationRetriever
 {
 
 	//private static StringBuilder OUT = new StringBuilder();
-	private static StringBuffer OUT = new StringBuffer();
+	//private static StringBuffer OUT = new StringBuffer();
+	static PrintStream OUT;
 	//private static PrintStream OUT;
 	private static int noOfArticles;
 
@@ -20,7 +27,7 @@ public class PubMedCitationRetriever
 	static String[] ids = { "" };
 
 
-	public static StringBuffer getPredications(String query,int number)
+	public static void getPredications(String query,int number, String filename)
 	{
 		try
 		{
@@ -44,8 +51,9 @@ public class PubMedCitationRetriever
 
 		catch (Exception e) { System.out.append(e.toString()); 
 		}
-		StringBuffer ps = printCitations(ids);
-		return ps;
+		//StringBuffer ps = 
+		printCitations(ids, filename);
+		//return ps;
 	}
 
 	@Deprecated
@@ -89,11 +97,11 @@ public class PubMedCitationRetriever
 		}
 		catch (Exception e) { System.out.println(e.toString()); 
 		}
-		StringBuffer ps = printCitations(fetcharray);
+		StringBuffer ps = null;// = printCitations(fetcharray);
 		return ps;
 	}
 
-	public static StringBuffer getPredications(String query)
+	public static void getPredications(String query, String filename)
 	{
 		PubMedGetPMID pgp = new PubMedGetPMID();
 		System.out.println("------------------------------------------------------");
@@ -101,11 +109,12 @@ public class PubMedCitationRetriever
 		String[] pmids = pgp.getPmidsForKeyword(query,Constants.PUBMED, Constants.MAX_NUMBER);
 
 		System.out.println("Total number of citations for query : "+ pmids.length);
-		StringBuffer OUT = printCitations(pmids);
-		return OUT;
+		//StringBuffer OUT = 
+		printCitations(pmids, filename);
+		//return OUT;
 	}
 
-	public static StringBuffer printCitations(String[] pmidList){
+	public static void printCitations(String[] pmidList, String filename){
 
 		try
 		{
@@ -113,7 +122,10 @@ public class PubMedCitationRetriever
 			EFetchPubmedServiceStub.EFetchRequest req = new EFetchPubmedServiceStub.EFetchRequest();
 
 			System.out.println("------------------------------------------------------");
-			System.out.println("Getting PubMed Article for each ciations");
+			System.out.println("Getting PubMed Article for each citations");
+			System.out.println("Total number of citations for query : "+ pmidList.length);
+			OUT = new PrintStream(new File(filename));
+			System.out.println("Writing to file : " + filename);
 			for(int i = 0 ; i<pmidList.length;i++){
 				req.setId(pmidList[i]);
 
@@ -148,23 +160,30 @@ public class PubMedCitationRetriever
 		catch (Exception e) { 
 			e.printStackTrace(); 
 		}
-		return OUT;
+		//return OUT;
 	}
 
-	//	public static void main(String[] args) throws IOException {
+	//	public static void main(String[] args) throws IOException{
 	//		PubMedCitationRetriever pm = new PubMedCitationRetriever();
-	//		String query="Testosterone[mh] AND prolactin AND sleep [mh] ";
-	//		
-	//		String result = getPredications(query).toString();
-	//				try {
-	//					FileWriter fw = new FileWriter("test.txt");
-	//					BufferedWriter bw = new BufferedWriter(fw);
-	//					bw.write(result);
-	//		
-	//					bw.close();
-	//				} catch (IOException e) {
-	//					System.err.print("Unable to write to file ");
-	//					e.printStackTrace();
-	//				}
+	//		//String query="Testosterone[mh] AND prolactin AND sleep [mh] ";
+	//		BufferedReader br = new BufferedReader(new FileReader(Constants.DISEASE_LIST));
+	//		String line, query;
+	//		String file = null, topic;
+	//		while((line = br.readLine())!= null)
+	//		{
+	//			query = line;
+	//			getPredications(query, 500);
+	//			//					try {
+	//			//						FileWriter fw = new FileWriter("test.txt");
+	//			//						BufferedWriter bw = new BufferedWriter(fw);
+	//			//						bw.write(result);
+	//			//			
+	//			//						bw.close();
+	//			//					} catch (IOException e) {
+	//			//						System.err.print("Unable to write to file ");
+	//			//						e.printStackTrace();
+	//			//					}
+	//			//break;
+	//		}
 	//	}
 }
