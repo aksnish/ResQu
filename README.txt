@@ -53,7 +53,7 @@ Step 2
 Step 3
 --------
 	- Extract semantic predications from the generated MEDLINE citations.
-	- run $SRC/drivers/TripleBuilderDriver.java (ant compile semrep-driver)
+	- run $SRC/drivers/SemRepPredicationExtractor.java (ant compile predication-extractor-driver)
 	- INPUT: MEDLINE Citations in MEDLINE format
 		+ $DATA_DIR/data/disease/ (in MEDLINE FORMAT)
 	- OUTPUT: Extracted semantic predications in SemRep Relational format 
@@ -62,7 +62,14 @@ Step 3
 
 Step 4
 ---------
-	- 
+	- Summarizer
+
+Step 5
+--------
+	- Build the semantic predications from the semrep relations outpu
+	- $SRC/drivers/PredicationBuilder.java (ant compile predication-builder-driver
+	- INPUT: 
+	- OUTPUT: 
 
 
 
