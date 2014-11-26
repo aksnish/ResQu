@@ -15,6 +15,6 @@ do
 	myFile="$base_dir$filename"
 	perl summarize_treatment.pl $myFile $preferred_name
 	echo "$filename $myFile $preferred_name"
-	break;
+	#break;
     fi	
 done
