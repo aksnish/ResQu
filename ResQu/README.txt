@@ -1,3 +1,30 @@
+/******************************
+* Name: 
+* Date
+* People: Nishita, Tom, Mike, Delroy, Amit
+* Decription: 
+*	The goal of this project is
+*	to develop a methodology that automatically
+*	determines the quality of a automatic, abstractive summary 
+*	of MEDLINE articles.
+******************************/
+
+Codebase: 
+	- svn co http://knoesis-svn.cs.wright.edu/svn/nishita/ResQu/
+
+Prerequisites
+	- Eclipse Kepler (3.2)
+	- Ant 
+	- ??
+
+Data:
+	- All data for the project can be retrieved from the knoesis-hpco server
+	- /usr/share/data/resqu/data/
+
+Step 1
+---------
+	- 
+
 Step 1
 ---------
 	- Process Documents to obtain predications from text.
@@ -16,9 +43,9 @@ Step 2
 - alternatively these can be processed with the SemRep source code yourself (http://skr.nlm.nih.gov/)
 
 		
-HOW TO RUN VARIOUS TASKS
+HOW TO 
 
-Step 1 - THE LSMDFS ALGORITHM
+Step 1 - ??
 ---------
 	- ant compile citation-driver
 
