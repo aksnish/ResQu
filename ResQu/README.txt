@@ -1,6 +1,8 @@
 /******************************
 * Name: 
-* Date
+* Date: 
+*	Start Date: Summer 2014
+	End Date: Summer 2015 (projected) 
 * People: Nishita, Tom, Mike, Delroy, Amit
 * Decription: 
 *	The goal of this project is
@@ -26,12 +28,13 @@ Data:
 
 Aliases:
 --------
+	- PROJ_NAME = ResQu
 	- DATA_DIR = /usr/share/data/resqu/data/
-
+	- SRC = $PROJ_NAME/src
 Step 1
 ---------
 	- Manually specify a list of query terms whose summaries must be generated
-	- $RESQU:/data/disease_topic_list.txt
+	- $DATA_DIR/disease_topic_list.txt
 	- NB: For this initial application, we will use 
 		+ A list of 20 Diseases
 		+ A list of 20 Drugs
@@ -39,28 +42,29 @@ Step 1
 Step 2
 ---------
 	- Get MEDLINE citations for the specified queries (i.e., Drugs and/or Diseases)
-	- run src/drivers/PubMedCitationRetriever.java
+	- run $SRC/drivers/PubMedCitationRetriever.java (ant compile citation-driver)
 	- INPUT: $DATA_DIR/disease_topic_list.txt
 	- OUTPUT: $DATA_DIR/data/disease/
-	- NB: Organize raw text according to prescribed MEDLINE format
-		UI - 10026156
+		NB: Organize raw text according to prescribed MEDLINE format
+		PMID - 10026156
 		TI - Not Available
 		AB - The ectopic expression of the carboxyl-terminal ...
 		
 Step 3
 --------
 	- Extract semantic predications from the generated MEDLINE citations.
-	- INPUT: 
-	- OUTPUT: 
-	
-	- run src/drivers/PubMedCitationRetriever 
-	- This code will read the passages file and create the Medline format concatenating to each document every relevant passage 
+	- run $SRC/drivers/TripleBuilderDriver.java (ant compile semrep-driver)
+	- INPUT: MEDLINE Citations in MEDLINE format
+		+ $DATA_DIR/data/disease/ (in MEDLINE FORMAT)
+	- OUTPUT: Extracted semantic predications in SemRep Relational format 
+		+ $DATA_DIR/semrep
+	- NB: Semantic predications can also be processed with the SemRep source code yourself (http://skr.nlm.nih.gov/) - CLARIFY
 
-Step 2
+Step 4
 ---------
+	- 
 
 
-- alternatively these can be processed with the SemRep source code yourself (http://skr.nlm.nih.gov/)
 
 		
 HOW TO 
