@@ -18,7 +18,7 @@ public class SemrepTripleExtractor {
 		String preferred_name = outputFile.replaceAll("_S", " ").replaceAll("_", " ");
 		preferred_name = preferred_name.substring(preferred_name.indexOf("/")+1, preferred_name.length());
 		//System.out.println(preferred_name);
-	
+
 		FlatFileContentIterator ffcit = new FlatFileContentIterator(inputFile);
 		try{
 
@@ -38,12 +38,12 @@ public class SemrepTripleExtractor {
 					String subject = pred.getSubject(line);
 					String predicate = pred.getPredicate(line);
 					String object = pred.getObject(line);
-					if(predicate.equals("TREATS")&&object.equals("Migraine Disorders")){
-						serialize(subject, predicate, object, out);
-					}
-					else
-					{
-					}
+					//if(predicate.equals("TREATS")&&object.equals("Migraine Disorders")){
+					serialize(subject, predicate, object, out);
+					//}
+					//else
+					//{
+					//}
 				}
 			}
 			ffcit.close();
@@ -58,4 +58,9 @@ public class SemrepTripleExtractor {
 		String delimeter = "-";
 		out.println(subject+delimeter+predicate+delimeter+object);
 	}
+	
+//	public static void main(String[] args) {
+//		SemrepTripleExtractor sm = new SemrepTripleExtractor();
+//		sm.getFilePredications("data/semrep/Sleeplessness_S.semrep", "data/se.txt");
+//	}
 }
