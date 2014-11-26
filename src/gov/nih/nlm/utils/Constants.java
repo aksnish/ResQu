@@ -39,4 +39,6 @@ public class Constants {
 	public static final String METAMAP_OUTPUT_FOLDER_PATH =DATA_FOLDER+METAMAP_OUTPUT_FOLDER;
 	
 	public static final String SERIALZED_MAPS_FOLDER = DATA_FOLDER+"serializedMaps/";
+	public static final String SUM_DOC_DIR = DATA_FOLDER+"summary-docs/";
+	
 }

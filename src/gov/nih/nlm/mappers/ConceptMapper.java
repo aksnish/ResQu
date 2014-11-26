@@ -1,5 +1,6 @@
 package gov.nih.nlm.mappers;
 
+import gov.nih.nlm.model.SummaryDocument;
 import gov.nih.nlm.utils.Constants;
 
 import java.io.BufferedReader;
@@ -16,7 +17,7 @@ import java.util.Map.Entry;
 
 public class ConceptMapper {
 
-	public void getConceptMap (String filename) throws IOException{
+	public SummaryDocument getConceptMap (String filename) throws IOException{
 		PrintWriter OUT = new PrintWriter(new FileWriter(Constants.DATA_FOLDER+"dictionary.txt", true));
 		BufferedReader br = new BufferedReader(new FileReader(filename));
 		HashMap<String,Integer> conceptMap = new HashMap<String,Integer>();
@@ -53,18 +54,7 @@ public class ConceptMapper {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
-
-	public static void main(String[] args) throws IOException {
-		ConceptMapper cp = new ConceptMapper();
-		File dir = new File(Constants.SUMMARIZE_FOLDER);
-		File [] list = dir.listFiles();
-		String filename;
-		for(File file : list){
-			filename =Constants.SUMMARIZE_FOLDER+file.getName();
-			//System.out.println("--------------------");
-			cp.getConceptMap(filename);
-			//break;			
-		}
-	}
+	
 }
