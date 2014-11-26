@@ -10,8 +10,7 @@ public class Constants {
 	public static final String COMPLEX_EXTENSION="_C";
 	public static final int  NO_OF_CITATIONS = 500;
 	public static final String MAX_NUMBER = "150000";
-
-
+	
 	public static final String EMAIL = "nishita@knoesis.org";
 	public static final String UTS_USER_NAME = "aksnish11";
 	public static final String UTS_PASSWORD ="$Nih2014";
@@ -20,7 +19,7 @@ public class Constants {
 	public static final String METAMAP_COMMAND = "metamap -J -I -Y dsyn,fndg,inpo,phsu";
 
 	public static final String QUERY = "";
-	public static final String DATA_FOLDER = /*"/usr/share/data/resqu/data/" ;*/  "data/";
+	public static final String DATA_FOLDER = "/usr/share/data/resqu/data/";
 	public static final String DISEASE_LIST=DATA_FOLDER+"disease_topic_list.txt";
 	public static final String TOPIC_DISEASE_FOLDER = DATA_FOLDER+"disease/";
 	public static final String TOPIC_DRUG_FILE = DATA_FOLDER+"drug/";
