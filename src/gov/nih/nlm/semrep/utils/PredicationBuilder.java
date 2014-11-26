@@ -8,7 +8,7 @@ import java.io.PrintWriter;
  * a flat file of all predications in the input text
  */
 
-public class TripleBuilder {
+public class PredicationBuilder {
 
 	@SuppressWarnings("unused")
 	public void getFilePredications (String inputFile, String outputFile){
