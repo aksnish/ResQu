@@ -2,14 +2,14 @@ package drivers;
 
 import java.io.File;
 
-import gov.nih.nlm.semrep.utils.TripleBuilder;
+import gov.nih.nlm.semrep.utils.PredicationBuilder;
 import gov.nih.nlm.utils.Constants;
 
-public class TripleBuilderDriver {
+public class PredicationBuilderDriver {
 
 	public static void main(String[] args) {
 
-		TripleBuilder semrep = new TripleBuilder();
+		PredicationBuilder semrep = new PredicationBuilder();
 		File directory = new File(Constants.SEMREP_FOLDER);
 		File[] directoryListing = directory.listFiles();
 		String filename, outputFile;

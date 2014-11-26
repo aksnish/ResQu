@@ -1,6 +1,6 @@
 package drivers;
 
-import gov.nih.nlm.semrep.utils.TripleBuilder;
+import gov.nih.nlm.semrep.utils.PredicationBuilder;
 
 import java.io.File;
 
@@ -9,7 +9,7 @@ public class SummarizedPredicationExtractorDriver {
 
 	public static void main (String args [])
 	{
-		TripleBuilder semrep = new TripleBuilder();
+		PredicationBuilder semrep = new PredicationBuilder();
 		String inputFile;
 		String outputFile;
 		File folder = new File("semrep/");
