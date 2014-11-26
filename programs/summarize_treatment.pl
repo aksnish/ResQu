@@ -92,7 +92,7 @@ chomp($debug_in);
 
 # Start debug
 if ( $debug_in eq "debug" ) {
-	open( FD, ">$input_file.debug" ) || die "Cannot open $input_file.debug\n";
+	#open( FD, ">$input_file.debug" ) || die "Cannot open $input_file.debug\n";
 	$debug = 1;
 }
 
@@ -110,14 +110,14 @@ if ( $debug_in eq "debug" ) {
 %relevant_rels    = &Relevance( \%prefiltered_rels );
 $relevant_outfile = $input_file;
 $relevant_outfile .= ".relevant";
-&Globals::PrintHash( \%relevant_rels, $relevant_outfile, %sent_hash );
+#&Globals::PrintHash( \%relevant_rels, $relevant_outfile, %sent_hash );
 print "Relevance complete...\n";
 
 # Connectivity
 %connected_rels    = &Connectivity( \%relevant_rels );
 $connected_outfile = $input_file;
 $connected_outfile .= ".connected";
-&Globals::PrintHash( \%connected_rels, $connected_outfile, %sent_hash );
+#&Globals::PrintHash( \%connected_rels, $connected_outfile, %sent_hash );
 print "Connectivity complete...\n";
 
 # Novelty
@@ -125,7 +125,7 @@ print "Processing predications for novelty...\n";
 %novel_rels    = &Novelty( \%connected_rels );
 $novel_outfile = $input_file;
 $novel_outfile .= ".novel";
-&Globals::PrintHash( \%novel_rels, $novel_outfile, %sent_hash );
+#&Globals::PrintHash( \%novel_rels, $novel_outfile, %sent_hash );
 print "Novelty complete...\n";
 
 # Saliency
@@ -136,10 +136,10 @@ print "Processing predications for saliency...\n";
 %rels_after_SRC = %{ $saliency_arr[2] };
 $SC_outfile     = $input_file;
 $SC_outfile .= ".salient_concepts";
-&Globals::PrintHash( \%rels_after_SCs, $SC_outfile, %sent_hash );
+#&Globals::PrintHash( \%rels_after_SCs, $SC_outfile, %sent_hash );
 $SR_outfile = $input_file;
 $SR_outfile .= ".salient_relations";
-&Globals::PrintHash( \%rels_after_SR, $SR_outfile, %sent_hash );
+#&Globals::PrintHash( \%rels_after_SR, $SR_outfile, %sent_hash );
 $SRC_outfile = $input_file;
 $SRC_outfile .= ".salient_predications";
 &Globals::PrintHash( \%rels_after_SRC, $SRC_outfile, %sent_hash );
