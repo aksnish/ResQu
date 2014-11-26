@@ -88,15 +88,15 @@
             </antcall>
     </target>
 			
-	<target name="semrep-driver" description="run the Legal Spans MDFS">
+	<target name="semrep-driver" description="Extracts semantic predications using the SKR API">
             <antcall target="run-class">
-                    <param name="class.name" value="drivers.SemRepPubMedCitationsDriver" />
+                    <param name="class.name" value="drivers.SemRepPredicationExtractorDriver" />
             </antcall>
     </target>
 
-	<target name="triple-extractor-driver" description="Triple Builder to obtain triples from semrep output">
+	<target name="triple-extractor-driver" description="Predication Builder to obtain triples from semrep output">
             <antcall target="run-class">
-                    <param name="class.name" value="drivers.TripleBuilderDriver" />
+                    <param name="class.name" value="drivers.PredicationBuilderDriver" />
             </antcall>
     </target>
 	
