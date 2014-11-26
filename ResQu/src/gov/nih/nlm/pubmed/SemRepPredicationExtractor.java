@@ -56,7 +56,7 @@ import java.io.*;
 import gov.nih.nlm.nls.skr.*;
 import gov.nih.nlm.utils.Constants;
 
-public class SemRepPubMedCitations
+public class SemRepPredicationExtractor
 {
 	public static void printHelp() {
 		System.out.println("usage: GenericBatchUser [options] inputFilename");
