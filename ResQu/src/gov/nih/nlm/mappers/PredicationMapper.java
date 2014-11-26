@@ -4,13 +4,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class PredicationMapper {
 
 	public void getConceptMap (String filename) throws FileNotFoundException{
 		BufferedReader br = new BufferedReader(new FileReader(filename));
-		HashMap<String,Integer> predicationMap = new HashMap<String,Integer>();
+		Map<String,Integer> predicationMap = new HashMap<String,Integer>();
 		String line;
 
 		try {
@@ -25,7 +26,7 @@ public class PredicationMapper {
 					}
 				}
 			MapSorter st = new MapSorter();
-			HashMap<String, Integer> sortedMap = st.sortByValues(predicationMap);
+			Map<String, Integer> sortedMap = st.sortByValue(predicationMap);
 			int c = 1;
 			for(Entry<String, Integer> e : sortedMap.entrySet()){
 				String key = e.getKey();
