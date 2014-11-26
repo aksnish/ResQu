@@ -1,6 +1,6 @@
 package drivers;
 
-import gov.nih.nlm.pubmed.SemRepPubMedCitations;
+import gov.nih.nlm.pubmed.SemRepPredicationExtractor;
 import gov.nih.nlm.utils.Constants;
 import gov.nih.nlm.utils.FilenameGenerator;
 
@@ -11,12 +11,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class SemRepPubMedCitationsDriver {
+public class SemRepPredicationExtractorDriver {
 
 	public static void main(String[] args) throws FileNotFoundException{
 
 
-		SemRepPubMedCitations pubSem = new SemRepPubMedCitations();
+		SemRepPredicationExtractor pubSem = new SemRepPredicationExtractor();
 		FilenameGenerator filegen = new FilenameGenerator();
 		String filename;
 		String results;
