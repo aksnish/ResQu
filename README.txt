@@ -23,15 +23,25 @@ Data:
 
 Step 1
 ---------
-	- 
-
-Step 1
+	- Manually specify a list of query terms whose summaries must be generated
+	- /data/disease_topic_list.txt
+ 
+Step 2
 ---------
-	- Process Documents to obtain predications from text.
-	- organize raw text according to prescribed Medline format
+	- Get MEDLINE citations for the specified queries
+	- run src/drivers/PubMedCitationRetriever 
+	- INPUT: /data/disease_topic_list.txt
+	- OUTPUT: /data/disease/
+	- NB: Organize raw text according to prescribed MEDLINE format
 		UI - 10026156
 		TI - Not Available
 		AB - The ectopic expression of the carboxyl-terminal ...
+		
+Step 3
+--------
+	- Extract semantic predications from the generated MEDLINE citations.
+	- INPUT: 
+	- OUTPUT: 
 	
 	- run src/drivers/PubMedCitationRetriever 
 	- This code will read the passages file and create the Medline format concatenating to each document every relevant passage 
