@@ -1,33 +1,32 @@
 package gov.nih.nlm.mappers;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MapSorter {
 
-	@SuppressWarnings("unchecked")
-	public static HashMap sortByValues(HashMap map) { 
-		List list = new LinkedList<Integer>(map.entrySet());
-		// Defined Custom Comparator here
-		Collections.sort(list, new Comparator() {
-			@SuppressWarnings("unchecked")
-			public int compare(Object o1, Object o2) {
-				return ((Comparable) ((Map.Entry) (o1)).getValue())
-						.compareTo(((Map.Entry) (o2)).getValue());
-			}
-		});
+	public Map<String, Integer> sortByValue(Map<String, Integer> unsortedMap) {
+		Map<String, Integer> sortedMap = new TreeMap<String, Integer>(new ValueComparator(unsortedMap));
+		sortedMap.putAll(unsortedMap);
+		return sortedMap;
+	}
 
-		HashMap sortedHashMap = new LinkedHashMap();
-		for (Iterator it = list.iterator(); it.hasNext();) {
-			Map.Entry entry = (Map.Entry) it.next();
-			sortedHashMap.put(entry.getKey(), entry.getValue());
-		} 
-		return sortedHashMap;
+}
+
+class ValueComparator implements Comparator<Object> {
+
+	Map<String, Integer> map;
+
+	public ValueComparator(Map<String, Integer> map) {
+		this.map = map;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public int compare(Object keyA, Object keyB) {
+		Comparable valueA = (Comparable) map.get(keyA);
+		Comparable valueB = (Comparable) map.get(keyB);
+		return valueB.compareTo(valueA);
 	}
 }
+
