@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class MetaMapOutputWriter {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		MetaMapConverter mc = new MetaMapConverter();
-		serializeHashMap(Constants.METAMAP_OUTPUT_FOLDER_PATH);
+		serializeHashMap(Constants.METAMAP_OUTPUT_FOLDER);
 	}
 	public static void serializeHashMap(String fname) throws IOException, ClassNotFoundException {
 		Map<String, String> topicMap;// = new HashMap<String,String>();
@@ -29,7 +29,7 @@ public class MetaMapOutputWriter {
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
 				topicMap = new HashMap<String,String>();
-				filename = Constants.METAMAP_OUTPUT_FOLDER_PATH+file.getName();
+				filename = Constants.METAMAP_OUTPUT_FOLDER+file.getName();
 				hfile = file.getName();
 
 				System.out.println("Reading file : "+filename);
