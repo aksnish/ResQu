@@ -22,7 +22,6 @@ public class FlatFileContentIterator implements Iterator<String>
 
 	public FlatFileContentIterator(String inputFile)
 	{
-		
 		try
 		{
 			in = new FileInputStream(new File(inputFile));
@@ -38,7 +37,6 @@ public class FlatFileContentIterator implements Iterator<String>
 
 	public FlatFileContentIterator(File inputFile)
 	{
-		
 		try
 		{
 			in = new FileInputStream(inputFile);
@@ -53,7 +51,6 @@ public class FlatFileContentIterator implements Iterator<String>
 	}
 	public boolean hasNext()
 	{
-
 		try
 		{
 			line1 = input1.readLine();
