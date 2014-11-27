@@ -19,10 +19,11 @@ public class Constants {
 	public static final String METAMAP_COMMAND = "metamap -J -I -Y dsyn,fndg,inpo,phsu";
 
 	public static final String QUERY = "";
-	public static final String DATA_FOLDER = "/usr/share/data/resqu/data/";
+	public static final String DATA_FOLDER = "data/";//"/usr/share/data/resqu/data/";
+	public static final String INPUT_FOLDER ="input/";
 	public static final String DISEASE_LIST=DATA_FOLDER+"disease_topic_list.txt";
-	public static final String TOPIC_DISEASE_FOLDER = DATA_FOLDER+"disease/";
-	public static final String TOPIC_DRUG_FILE = DATA_FOLDER+"drug/";
+	public static final String DISEASE_FOLDER = DATA_FOLDER+INPUT_FOLDER+"disease/";
+	public static final String DRUG_FOLDER = DATA_FOLDER+INPUT_FOLDER+"drug/";
 	public static final String SEMREP_FOLDER = DATA_FOLDER+"semrep/";
 	
 	public static final String SUMMARIZE_FOLDER = DATA_FOLDER+"summarized-triples/";
@@ -33,10 +34,8 @@ public class Constants {
 	public static final String CRAWLER_DATA_FOLDER="jericho/";
 	public static final String CRAWLER_DATA_FOLDER_PATH =DATA_FOLDER+CRAWLER_DATA_FOLDER;
 
-	public static final String METAMAP_INPUT_FOLDER = "metamap-input/";
-	public static final String METAMAP_INPUT_FOLDER_PATH =DATA_FOLDER+METAMAP_INPUT_FOLDER;
-	public static final String METAMAP_OUTPUT_FOLDER = "metamap-output/";
-	public static final String METAMAP_OUTPUT_FOLDER_PATH =DATA_FOLDER+METAMAP_OUTPUT_FOLDER;
+	public static final String METAMAP_INPUT_FOLDER =DATA_FOLDER+"metamap-input/";
+	public static final String METAMAP_OUTPUT_FOLDER =DATA_FOLDER+"metamap-output/";
 	
 	public static final String SERIALZED_MAPS_FOLDER = DATA_FOLDER+"serializedMaps/";
 	public static final String SUM_DOC_DIR = DATA_FOLDER+"summary-docs/";
