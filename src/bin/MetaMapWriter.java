@@ -30,7 +30,7 @@ public class MetaMapWriter {
 			if (file.isFile()) {
 				filename= "data/"+file.getName();			
 				out = new PrintWriter(new FileWriter(filename));
-				String inputBuf = Constants.METAMAP_INPUT_FOLDER_PATH+file.getName();
+				String inputBuf = Constants.METAMAP_INPUT_FOLDER+file.getName();
 				String results = mc.getMetaMapFormat(inputBuf);
 				//	System.out.println(results);
 				writeMetamapToFile(results, out);
