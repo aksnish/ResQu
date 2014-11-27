@@ -1,6 +1,7 @@
 package gov.nih.nlm.pubmed;
 
 import gov.nih.nlm.ncbi.www.soap.eutils.EUtilsServiceStub;
+import gov.nih.nlm.utils.Constants;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -21,7 +22,7 @@ public class PubMedGetPMID {
 			for (int i = 0; i < Integer.parseInt(res.getCount()); i++){
 				if(i>0)pmid += ",";
 				pmid += res.getIdList().getId()[i];
-				
+
 			}
 			String[] pmids = pmid.split(",");
 
@@ -31,4 +32,14 @@ public class PubMedGetPMID {
 			return null;
 		}
 	}
+	
+	
+	//	public static void main(String[] args) {
+	//		PubMedGetPMID gpm = new PubMedGetPMID();
+	//		String query="Migraine Disorders";
+	//		String[] list = gpm.getPmidsForKeyword(query,Constants.PUBMED, Constants.MAX_NUMBER);
+	//		for(String str :list){
+	//			System.out.println("PMID : " +str+" " + list.length);
+	//		}
+	//	}
 }
