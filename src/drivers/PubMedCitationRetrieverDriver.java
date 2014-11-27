@@ -27,15 +27,23 @@ public class PubMedCitationRetrieverDriver {
 		FilenameGenerator filegen = new FilenameGenerator();
 		BufferedReader br = new BufferedReader(new FileReader(Constants.DISEASE_LIST));
 		String line, query;
-		String file = null, topic;
+		File file;
+		String topic, filename;
+		int i = 1;
+		String j;
 		while((line = br.readLine())!= null)
 		{
 			topic = line;
 			query = topic+Constants.SIMPLE_MESH_HEADINGS;
 			System.out.println("PubMed Query : "+query);
-			file = Constants.TOPIC_DISEASE_FOLDER+filegen.setFilename(query, topic);
-			PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS, file);
+			filename = filegen.setFilename(Constants.DISEASE_FOLDER ,query, topic,i);
+			System.out.println("file :"+filename);
+
+
+			PubMedCitationRetriever.getPredications(query,Constants.NO_OF_CITATIONS, filename);
 			System.out.println("------------------------------------------------------");
+			//break;
+			i++;
 		}
 		br.close();
 	}
@@ -43,7 +51,7 @@ public class PubMedCitationRetrieverDriver {
 	public static void writeMetaMapToFile(String content, String filePath) throws IOException, ClassNotFoundException {
 		Writer writer = null;
 		try {
-			writer = new FileWriter(Constants.TOPIC_DISEASE_FOLDER+filePath);
+			writer = new FileWriter(Constants.DISEASE_FOLDER+filePath);
 			writer.write(content);
 		} catch (IOException e) {	
 			System.err.println("Error writing the file : ");
@@ -57,7 +65,6 @@ public class PubMedCitationRetrieverDriver {
 					e.printStackTrace();
 				}
 			}
-
 		}
 	}
 }

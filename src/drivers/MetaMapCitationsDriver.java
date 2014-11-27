@@ -27,19 +27,20 @@ public class MetaMapCitationsDriver {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		MetaMapConverter mc = new MetaMapConverter();
-		File folder = new File(Constants.METAMAP_INPUT_FOLDER_PATH);
+		File folder = new File(Constants.METAMAP_INPUT_FOLDER);
 		File[] listOfFiles = folder.listFiles();
 		String filename = null;
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
-				filename= Constants.METAMAP_OUTPUT_FOLDER_PATH+file.getName();
+				filename= Constants.METAMAP_OUTPUT_FOLDER+file.getName();
 				System.out.println("output file name  :"+ filename);				
-				String inputBuf = Constants.METAMAP_INPUT_FOLDER_PATH+file.getName();
-				//String results =mc.getMetaMapFormat(inputBuf);
-				//writeMetaMapToFile(results, filename);
+				String inputBuf = Constants.METAMAP_INPUT_FOLDER+file.getName();
+				String results =mc.getMetaMapFormat(inputBuf);
+				writeMetaMapToFile(results, filename);
 			}
+			break;
 		}
-		serializeHashMap(Constants.METAMAP_OUTPUT_FOLDER_PATH);
+		//serializeHashMap(Constants.METAMAP_OUTPUT_FOLDER_PATH);
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class MetaMapCitationsDriver {
 			}
 
 		}
-		serializeHashMap(Constants.METAMAP_OUTPUT_FOLDER_PATH);
+		//serializeHashMap(Constants.METAMAP_OUTPUT_FOLDER_PATH);
 	}
 
 	public static void serializeHashMap(String fname) throws IOException, ClassNotFoundException {
@@ -86,7 +87,7 @@ public class MetaMapCitationsDriver {
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
 				topicMap = new HashMap<String,String>();
-				filename = Constants.METAMAP_OUTPUT_FOLDER_PATH+file.getName();
+				filename = Constants.METAMAP_OUTPUT_FOLDER+file.getName();
 				hfile = file.getName();
 
 				System.out.println("Reading file : "+filename);
@@ -110,14 +111,14 @@ public class MetaMapCitationsDriver {
 						}
 					}
 				}
-				FileOutputStream fos =	new FileOutputStream("data/serializedMaps/"+hfile.replaceAll(".txt","")+".ser");
+				FileOutputStream fos =	new FileOutputStream(Constants.SERIALZED_MAPS_FOLDER+hfile.replaceAll(".txt","")+".ser");
 				ObjectOutputStream oos = new ObjectOutputStream(fos);
 				oos.writeObject(topicMap);
 				oos.close();
 				fos.close();
 			}
 		}
-		deSerialize();
+		//deSerialize();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
