@@ -13,8 +13,8 @@ public class PredicationBuilder {
 	@SuppressWarnings("unused")
 	public void getFilePredications (String inputFile, String outputFile){
 		Predication pred = new Predication();
-		String preferred_name = outputFile.replaceAll("_S", " ").replaceAll("_", " ");
-		preferred_name = preferred_name.substring(preferred_name.indexOf("/")+1, preferred_name.length());
+		//String preferred_name = outputFile.replaceAll("_S", " ").replaceAll("_", " ");
+		//preferred_name = preferred_name.substring(preferred_name.indexOf("/")+1, preferred_name.length());
 		
 		FlatFileContentIterator ffcit = new FlatFileContentIterator(inputFile);
 		try{
