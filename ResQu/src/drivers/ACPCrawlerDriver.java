@@ -18,13 +18,13 @@ public class ACPCrawlerDriver {
 	public static void main(String[] args) throws Exception {
 		String abs_elements = null;
 		//OUT = System.out;
-		File folder = new File("data/jericho/");
+		File folder = new File(Constants.CRAWLER_DATA_FOLDER);
 		File[] listOfFiles = folder.listFiles();
 
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
 				System.out.println("Files: "+ file.getName());
-				String filename = Constants.METAMAP_INPUT_FOLDER_PATH+file.getName();
+				String filename = Constants.METAMAP_INPUT_FOLDER+file.getName();
 				OUT = new PrintStream(new File(filename.replaceAll(".html", "_indications.txt")));
 				List<Tag> fontTagList = new ArrayList<Tag>();
 				ClinicalResourceCrawler crawl = new ClinicalResourceCrawler();
