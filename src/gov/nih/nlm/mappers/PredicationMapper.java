@@ -31,10 +31,10 @@ public class PredicationMapper {
 			for(Entry<String, Integer> e : sortedMap.entrySet()){
 				String key = e.getKey();
 				int value =e.getValue();
-				System.out.println( c++ +"  " + "Predications: "+key+"        Value:"+value);
+				System.out.println( key+":"+value);
 
 			}
-			System.out.println(sortedMap.size());
+			//System.out.println(sortedMap.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -43,7 +43,7 @@ public class PredicationMapper {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		PredicationMapper cp = new PredicationMapper();
-		cp.getConceptMap("Migraine_Disorders_S.txt");
+		cp.getConceptMap("data/summarized-triples/Asthma_S.semrep.salient_predications");
 	}
 
 }
