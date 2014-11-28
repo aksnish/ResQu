@@ -19,7 +19,6 @@ public class LuceneIndexWriterDriver {
 		LuceneIndexWriter writer = new LuceneIndexWriter(lucene_index_dir);
 		for(String file_path: files){
 			content = reader.getContent(file_path);
-			//System.out.println(content);
 			writer.write(content);
 		}
 		writer.close();
