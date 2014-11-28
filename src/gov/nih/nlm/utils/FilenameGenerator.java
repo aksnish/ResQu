@@ -49,7 +49,7 @@ public class FilenameGenerator {
 		else{
 			result = Integer.toString(i);
 		}
-		
+
 		//Constants.DISEASE_FOLDER
 		String dir = directoryPrefix+result+"-"+topic;
 		dir=dir.replaceAll(" ", "_");
@@ -58,20 +58,20 @@ public class FilenameGenerator {
 		if (!directory.exists()) {
 			directory.mkdirs();
 
-			System.out.println("Dir : "+directory);
-			if(querystr.contains(Constants.DRUG_THERAPY)){
+			//System.out.println("Dir : "+directory);
+			if(querystr.contains(Constants.DRUG_THERAPY)||querystr.contains("_C")){
 				filename = directory+"/"+topic+Constants.COMPLEX_EXTENSION;
-			}else{ 
+			}else if(querystr.contains("_S")){ 
 				filename = directory+"/"+topic+Constants.SIMPLE_EXTENSION;
 			}
 			filename=filename.replaceAll(" ", "_");
 		}
 		else{
 			System.out.println("directory already exists"+directory);
-			if(querystr.contains(Constants.DRUG_THERAPY))
+			if(querystr.contains(Constants.DRUG_THERAPY)||querystr.contains("_C"))
 			{
 				filename = directory+"/"+topic+Constants.COMPLEX_EXTENSION;
-			}else{ 
+			}else if(querystr.contains("_S")){ 
 				filename = directory+"/"+topic+Constants.SIMPLE_EXTENSION;
 			}
 			filename=filename.replaceAll(" ", "_");
@@ -80,10 +80,14 @@ public class FilenameGenerator {
 	}
 
 
-	//	public static void main(String[] args) {
-	//		FilenameGenerator fg = new FilenameGenerator();
-	//		String file = fg.normalizeFileName("data/disease/Migraine Disorders_S.txt");
-	//		System.out.println(file);
-	//	}
+
+
+
+		public static void main(String[] args) throws IOException {
+			FilenameGenerator fg = new FilenameGenerator();
+//			String file = fg.normalizeFileName("data/disease/Migraine Disorders_S.txt");
+//			System.out.println(file);
+			fg.setFilename(Constants.SUM_DOC_DIR, "Migraine_S","Migraine", 1);
+		}
 
 }
