@@ -28,7 +28,7 @@ public class Constants {
 	
 	public static final String SUMMARIZE_FOLDER = DATA_FOLDER+"summarized-triples/";
 	public static final String USER_AGENT = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.11) Gecko/2009060215 Firefox/3.0.11 GTB6 (.NET CLR 3.5.30729)";
-
+	
 
 	public static final String CRAWLER_FILE_PREFIX="file:";
 	public static final String CRAWLER_DATA_FOLDER="jericho/";
