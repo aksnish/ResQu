@@ -5,14 +5,17 @@
 */
 package gov.nih.nlm.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SummaryDocument {
+@SuppressWarnings("serial")
+public class SummaryDocument implements Serializable {
 
 	private String topic;
 	private int id;
 	private String type;
-	private List<String> contentList;
+	private List<String> contentList = new ArrayList<String>();
 	
 	public SummaryDocument(){}
 	
@@ -50,10 +53,9 @@ public class SummaryDocument {
 	}
 	
 	public void setContentList(List<String> contentList) {
-		for(String keyPhrase : contentList){
-			this.contentList.add(keyPhrase);
-		}
-		this.contentList = contentList;
+//		for(String keyPhrase : contentList){
+//			this.contentList.add(keyPhrase);
+//		}
+		this.contentList = new ArrayList<String>(contentList);
 	}
-	
 }
