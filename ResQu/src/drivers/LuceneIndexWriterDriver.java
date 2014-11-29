@@ -1,8 +1,8 @@
 package drivers;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import gov.nih.nlm.core.lucene.LuceneIndexWriter;
 import gov.nih.nlm.utils.Constants;
 import gov.nih.nlm.utils.CorpusReader;
@@ -13,15 +13,40 @@ public class LuceneIndexWriterDriver {
 		String lucene_index_dir ="data/input_lucene/";
 		String corpus_dir = Constants.SUM_DOC_DIR;
 		CorpusReader reader = new CorpusReader(corpus_dir);
-		List<String> files = reader.getFiles();
+		List<String> folder = reader.getFiles();
 		String content;
 
-		LuceneIndexWriter writer = new LuceneIndexWriter(lucene_index_dir);
-		for(String file_path: files){
-			content = reader.getContent(file_path);
-			writer.write(content);
+		File list;
+		File [] files;
+		for(String folder_path: folder){
+			list = new File(folder_path);
+			files = list.listFiles();
+			System.out.println("------------------------------------");
+			System.out.println("Serializing Index: " + folder_path);
+			LuceneIndexWriter writer = null;
+			String idxfile = null;
+			try {
+				for(File file_path : files){
+					if(idxfile == null){
+						idxfile = lucene_index_dir+file_path.getName().replaceAll("_[A-Z]*.txt", "");
+						writer = new LuceneIndexWriter(idxfile);
+					}
+					if(file_path.getName().contains("_GS")){
+						System.out.println("GS File: "+ file_path.getName());
+						content = reader.getContent(file_path.toString());
+						writer.write(content, 0);
+					}else {
+						System.out.println("Reg File: "+ file_path.getName());
+						content = reader.getContent(file_path.toString());
+						writer.write(content, 1);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println();
+			writer.close();
 		}
-		writer.close();
-	}
 
+	}
 }

@@ -19,7 +19,7 @@ public class Constants {
 	public static final String METAMAP_COMMAND = "metamap -J -I -Y dsyn,fndg,inpo,phsu";
 
 	public static final String QUERY = "";
-	public static final String DATA_FOLDER = "/usr/share/data/resqu/data/";
+	public static final String DATA_FOLDER = "data/";//"/usr/share/data/resqu/data/";
 	public static final String INPUT_FOLDER ="input/";
 	public static final String DISEASE_LIST=DATA_FOLDER+"disease_topic_list.txt";
 	public static final String DISEASE_FOLDER = DATA_FOLDER+INPUT_FOLDER+"disease/";
@@ -39,5 +39,9 @@ public class Constants {
 	
 	public static final String SERIALZED_MAPS_FOLDER = DATA_FOLDER+"serializedMaps/";
 	public static final String SUM_DOC_DIR = DATA_FOLDER+"summary-docs/";
+	public static final String CONTENT_FIELD = "content";
 	
+	/*Core Constants*/
+	
+	//public static final  LUCENE_VERSION = 4.10.2;
 }
