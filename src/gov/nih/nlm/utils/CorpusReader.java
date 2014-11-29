@@ -14,15 +14,15 @@ public class CorpusReader {
 	}
 
 	public List<String> getFiles() {
-		System.out.println("Getting the list of files from : " + corpus_dir);
+		System.out.println("Reading Directory: " + corpus_dir);
 		DirectoryFileListIterator dirfile = new DirectoryFileListIterator();
 		List<String> fileList = new ArrayList<String>();
-		fileList = dirfile.getDirectoryFileList(corpus_dir);
+		fileList = dirfile.getDirectoryFolderList(corpus_dir);
 		return fileList;
 	}
 
 	public String getContent(String file_path) throws IOException {
-		System.out.println("Getting the content");
+		//System.out.println("Getting the content");
 		BufferedReader bufReader = null;
 		StringBuffer buf = new StringBuffer(" ");
 		bufReader = new BufferedReader(new FileReader(file_path));

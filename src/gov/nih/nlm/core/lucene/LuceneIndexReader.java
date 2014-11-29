@@ -1,6 +1,7 @@
 package gov.nih.nlm.core.lucene;
 
 import gov.nih.nlm.model.DocVector;
+import gov.nih.nlm.utils.Constants;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,15 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.DocsEnum;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.SlowCompositeReaderWrapper;
 import org.apache.lucene.index.Terms;
 import org.apache.lucene.index.TermsEnum;
-import org.apache.lucene.search.DocIdSetIterator;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.BytesRef;
@@ -58,7 +56,7 @@ public class LuceneIndexReader {
 	public List<DocVector> getDocVectors(List<Document> docList) {
 		List<DocVector> docVecList = new ArrayList<DocVector>();
 		Document doc;
-		DocVector docVec;
+		DocVector docVec = null;
 		String content;
 		try {
 			int numOfDocs = indexReader.maxDoc();
@@ -66,16 +64,17 @@ public class LuceneIndexReader {
 			{
 				doc = indexReader.document(i);
 				int id = Integer.parseInt(doc.get("docId"));
-				content = doc.get("content");
-				Terms terms = indexReader.getTermVector(id, "content"); 
+				int type = Integer.parseInt(doc.get("type"));
+				content = doc.get(Constants.CONTENT_FIELD);
+				Terms terms = indexReader.getTermVector(id,Constants.CONTENT_FIELD); 
 				if (terms != null && terms.size() > 0) {
-					docVec = new DocVector(id, dictionary);
+					docVec = new DocVector(id, dictionary, type);
 					docVec.setContent(content);
-					TermsEnum termsEnum = terms.iterator(null); // access the terms for this field
+					TermsEnum termsEnum = terms.iterator(null);
 					BytesRef term = null;
-					while ((term = termsEnum.next()) != null) {// explore the terms for this field
-
+					while ((term = termsEnum.next()) != null) {
 						docVec.setEntry(term.utf8ToString(), Double.parseDouble(Long.toString(termsEnum.totalTermFreq())));
+						//docVec.setEntry(term.utf8ToString(), Double.parseDouble(Long.toString(termsEnum.totalTermFreq())), indexReader, Constants.CONTENT_FIELD);
 					}
 					docVecList.add(docVec);
 				}
@@ -86,11 +85,13 @@ public class LuceneIndexReader {
 		return docVecList;
 	}
 
+
+
 	public void createDictionary(){
 		dictionary = new HashMap<String,Integer>();
 		try {
 			int pos = 0;
-			Terms indexTerms = SlowCompositeReaderWrapper.wrap(indexReader).terms("content");
+			Terms indexTerms = SlowCompositeReaderWrapper.wrap(indexReader).terms(Constants.CONTENT_FIELD);
 			TermsEnum termsEnum = indexTerms.iterator(null);
 			while ((termsEnum.next()) != null) {
 				dictionary.put(termsEnum.term().utf8ToString(), pos++);
