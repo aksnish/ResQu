@@ -15,10 +15,12 @@ public class DocVector {
 	public int id;
 	public String content;
 	public int type;
+	public String filename;
 
-	public DocVector(int id, Map<String,Integer> dictionary, int type) {
+	public DocVector(int id, Map<String,Integer> dictionary, int type, String filename) {
 		this.id = id;
 		this.type = type;
+		this.filename = filename;
 		this.dictionary = dictionary;
 		this.matrix = new OpenMapRealVector(dictionary.size());
 	}

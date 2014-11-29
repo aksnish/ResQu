@@ -34,11 +34,11 @@ public class LuceneIndexWriterDriver {
 					if(file_path.getName().contains("_GS")){
 						System.out.println("GS File: "+ file_path.getName());
 						content = reader.getContent(file_path.toString());
-						writer.write(content, 0);
+						writer.write(content, 0, file_path.getName());
 					}else {
 						System.out.println("Reg File: "+ file_path.getName());
 						content = reader.getContent(file_path.toString());
-						writer.write(content, 1);
+						writer.write(content, 1, file_path.getName());
 					}
 				}
 			} catch (Exception e) {

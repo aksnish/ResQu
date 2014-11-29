@@ -39,7 +39,7 @@ public class LuceneIndexWriter {
 		}
 	}
 
-	public void write(String content, int type){
+	public void write(String content, int type, String filename){
 		try {
 			FieldType fieldType = new FieldType();
 			fieldType.setStored(true);
@@ -49,6 +49,7 @@ public class LuceneIndexWriter {
 			doc.add(new Field("content", content, fieldType)); 
 			doc.add(new Field("docId", Integer.toString(id++), fieldType));
 			doc.add(new Field("type", Integer.toString(type) , fieldType)); 
+			doc.add(new Field("filename", filename , fieldType)); 
 			indexWriter.addDocument(doc);
 		} catch (IOException e) {
 			e.printStackTrace();

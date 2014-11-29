@@ -58,4 +58,7 @@ public class SummaryDocument implements Serializable {
 //		}
 		this.contentList = new ArrayList<String>(contentList);
 	}
+	public int hashCode (){
+		return this.id*topic.hashCode()*type.hashCode();
+	}
 }
