@@ -2,6 +2,8 @@ package gov.nih.nlm.core.lucene;
 
 import gov.nih.nlm.model.DocVector;
 import gov.nih.nlm.utils.Constants;
+import gov.nih.nlm.utils.CorpusReader;
+import gov.nih.nlm.utils.DirectoryFileListIterator;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -26,16 +29,23 @@ public class LuceneIndexReader {
 	private Map<String,Integer> dictionary;
 
 	public LuceneIndexReader(String dir){
+		//		DirectoryFileListIterator dirFile = new DirectoryFileListIterator();
+		//		List<String> files = dirFile.getDirectoryFolderList(dir);
+		//		for(String idxFile : files){
+		//			System.out.println("File: "+idxFile);
 		try {
 			if(indexReader==null){
 				directory = FSDirectory.open(new File(dir));
+				//				System.out.println(directory.toString());
 				indexReader = DirectoryReader.open(directory);
 				createDictionary();
 			}
-		}catch(Exception e){
+		}
+		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
+	//		}
 
 	public List<Document> getDocs() {
 		List<Document> docList = new ArrayList<Document>();
@@ -65,10 +75,11 @@ public class LuceneIndexReader {
 				doc = indexReader.document(i);
 				int id = Integer.parseInt(doc.get("docId"));
 				int type = Integer.parseInt(doc.get("type"));
+				String filename = (doc.get("filename"));
 				content = doc.get(Constants.CONTENT_FIELD);
 				Terms terms = indexReader.getTermVector(id,Constants.CONTENT_FIELD); 
 				if (terms != null && terms.size() > 0) {
-					docVec = new DocVector(id, dictionary, type);
+					docVec = new DocVector(id, dictionary, type, filename);
 					docVec.setContent(content);
 					TermsEnum termsEnum = terms.iterator(null);
 					BytesRef term = null;
@@ -84,8 +95,6 @@ public class LuceneIndexReader {
 		}
 		return docVecList;
 	}
-
-
 
 	public void createDictionary(){
 		dictionary = new HashMap<String,Integer>();

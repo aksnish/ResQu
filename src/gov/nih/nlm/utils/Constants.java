@@ -41,7 +41,9 @@ public class Constants {
 	public static final String SUM_DOC_DIR = DATA_FOLDER+"summary-docs/";
 	public static final String CONTENT_FIELD = "content";
 	
+	
 	/*Core Constants*/
 	
 	//public static final  LUCENE_VERSION = 4.10.2;
+	public static final String LUCENE_INDEX_PATH = DATA_FOLDER+"input_lucene";
 }
