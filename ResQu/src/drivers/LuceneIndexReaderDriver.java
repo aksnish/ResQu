@@ -15,6 +15,7 @@ import gov.nih.nlm.core.similarity.measures.SimilarityScorer;
 import gov.nih.nlm.model.DocVector;
 import gov.nih.nlm.utils.Constants;
 import gov.nih.nlm.utils.DirectoryFileListIterator;
+import gov.nih.nlm.utils.SerializeToFile;
 
 public class LuceneIndexReaderDriver {
 
@@ -31,18 +32,21 @@ public class LuceneIndexReaderDriver {
 		List<Double> eudDistList = new ArrayList<Double>();
 		List<Double> jsdList = new ArrayList<Double>();
 		DivergenceMetrics jsd = new DivergenceMetrics();
+		String path_name = null;
+		SerializeToFile serf = new SerializeToFile();
+		double cosineSim = 0;
 
 		for(String idxFile : files){
-			String path_name = idxFile.substring(idxFile.lastIndexOf("/")+1, idxFile.length());
+			path_name = idxFile.substring(idxFile.lastIndexOf("/")+1, idxFile.length());
 			try {
 				indexReader =  new LuceneIndexReader(idxFile);
 				docList = indexReader.getDocs();
 				docVectrorList = indexReader.getDocVectors(docList); 
 				simScore = new SimilarityScorer(docVectrorList);
-				double cosineSim = simScore.getCosineSimilarity(docVectrorList);
-				cosineSimList.add(cosineSim);
+				cosineSim = simScore.getCosineSimilarity(docVectrorList);
+				//				cosineSimList.add(cosineSim);
 				double euclidean = simScore.getEuclideanDistance(docVectrorList);
-				eudDistList.add(euclidean);
+				//				eudDistList.add(euclidean);
 				double jsD = simScore.getJSDivergence(docVectrorList);
 				jsdList.add(jsD);
 				indexReader.close();
@@ -51,18 +55,30 @@ public class LuceneIndexReaderDriver {
 			catch(Exception e){
 				e.printStackTrace();
 			}
-
+			//			Double[] eudArr = eudDistList.toArray(new Double[eudDistList.size()]);
+			//			double[] toNormArr = ArrayUtils.toPrimitive(eudArr);
+			//			double [] normArr = simScore.normalizeArray(toNormArr);
+			//
+			//			Double [] dArr = ArrayUtils.toObject(normArr);
+			//			List<Double> list = Arrays.asList(dArr);
+			//			serf.serializeList(list, path_name+"_eud");
+			serf.serializeList(cosineSim, path_name+"_cos");
 		}
-		Double[] eudArr = eudDistList.toArray(new Double[eudDistList.size()]);
-		double[] toNormArr = ArrayUtils.toPrimitive(eudArr);
-		double [] normArr = simScore.normalizeArray(toNormArr);
-		
-		Double[] jsdArr = jsdList.toArray(new Double[jsdList.size()]);
-		double[] jsdArrArr = ArrayUtils.toPrimitive(jsdArr);
-		double [] normArrjsd = simScore.normalizeArray(jsdArrArr);
 
-		System.out.println("Cosine sim list : "+ cosineSimList);
-		System.out.println("Eud Dist list : "+ Arrays.toString(normArr));
-		System.out.println("JS Div list : "+ Arrays.toString(normArrjsd));
+
+		serf.readdSerializedFile(Constants.DATA_FOLDER+"r-lists/");
+
+
+		//		Double[] eudArr = eudDistList.toArray(new Double[eudDistList.size()]);
+		//		double[] toNormArr = ArrayUtils.toPrimitive(eudArr);
+		//		double [] normArr = simScore.normalizeArray(toNormArr);
+		//
+		//		Double[] jsdArr = jsdList.toArray(new Double[jsdList.size()]);
+		//		double[] jsdArrArr = ArrayUtils.toPrimitive(jsdArr);
+		//		double [] normArrjsd = simScore.normalizeArray(jsdArrArr);
+		//
+		//		System.out.println("Cosine sim list : "+ cosineSimList);
+		//		System.out.println("Eud Dist list : "+ Arrays.toString(normArr));
+		//		System.out.println("JS Div list : "+ Arrays.toString(normArrjsd));
 	}
 }
