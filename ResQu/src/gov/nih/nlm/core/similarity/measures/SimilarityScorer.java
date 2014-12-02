@@ -2,17 +2,22 @@ package gov.nih.nlm.core.similarity.measures;
 
 import gov.nih.nlm.model.DocVector;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.math3.ml.distance.EuclideanDistance;
-import org.apache.commons.math3.util.MathArrays;
+
+import com.aliasi.cluster.KMeansClusterer;
+import com.aliasi.stats.Statistics;
 
 public class SimilarityScorer {
 	public List<DocVector> docVectrorList;
 	public DocVector goldStdDocVec;
 	private EuclideanDistance eud;
-	
+	private KMeansClusterer<String> knmeans;
+	private Statistics lingPipeStats;
+
 	public SimilarityScorer(List<DocVector> docVectrorList) {	
 		Iterator<DocVector> list_ite = docVectrorList.iterator();
 		while(list_ite.hasNext()){
@@ -45,25 +50,30 @@ public class SimilarityScorer {
 
 	public double getEuclideanDistance(List<DocVector> docVectorList){
 		eud = new EuclideanDistance();
-		double [] array1 = goldStdDocVec.matrix.toArray();
+		double [] array1 = goldStdDocVec.matrix.toArray(); 
 		double [] array2 = null;
 		for(DocVector docVec : docVectorList){
 			array2 = docVec.matrix.toArray();
 		}
+		double eudu = eud.compute(array1, array2);
+		//		DocVecToArray [] dcarr = {new DocVecToArray(goldStdDocVec.id, goldStdDocVec.filename, goldStdDocVec.type)};
+		//		System.out.println("\t"+ eudu + "\t" + "{ gold_doc:"+goldStdDocVec.filename +goldStdDocVec.id+", doc:}" );
 		return eud.compute(array1, array2);
 	}
 
-	public static double[] normalizeArray (double [] array){
+	public double[] normalizeArray (double [] array){
 		double max =0.0;
 		for(int i=0; i<array.length;i++){
 			if(max<=array[i]){
 				max = array[i];
 			}
 		}
+
+		//		System.out.println("max :"+max);
 		final double[] result = new double[array.length];
 		for(int i=0; i<array.length;i++){
-			//			System.out.println(max);
-			result[i]=array[i]/max;		
+			result[i]=array[i]/max;	
+			//			System.out.println("after div arr : "+ result[i]);
 		}
 		return result;
 	}
@@ -74,14 +84,16 @@ public class SimilarityScorer {
 		}
 	}
 
-	//	public static void main(String[] args) {
-	//		double [] ar1 = {0.0 ,1.0, 10.5, 1230.5 };
-	//		double [] ar3 = {0.0 ,1.0, 1333.8, 23456.7 };
-	//		//			double [] ar2 = MathArrays.normalizeArray(ar1,1);
-	//		double [] ar2 = normalizeArray(ar1);
-	//		double [] ar4 = normalizeArray(ar3);
-	//		for(int i=0; i<ar4.length;i++){
-	//			System.out.println(ar4[i]);
-	//		}
-	//	}
+	public double getJSDivergence(List<DocVector> docVectorList){
+		double [] array1 = goldStdDocVec.matrix.toArray(); 
+		double [] array2 = null;
+		for(DocVector docVec : docVectorList){
+			array2 = docVec.matrix.toArray();
+		}
+		double [] resultG = normalizeArray(array1);
+		double [] result = normalizeArray(array2);
+
+		return Statistics.jsDivergence(resultG,result);
+	}
+
 }
