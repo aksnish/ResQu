@@ -15,9 +15,6 @@ public class SimilarityScorer {
 	public List<DocVector> docVectrorList;
 	public DocVector goldStdDocVec;
 	private EuclideanDistance eud;
-	private KMeansClusterer<String> knmeans;
-	private Statistics lingPipeStats;
-
 	public SimilarityScorer(List<DocVector> docVectrorList) {	
 		Iterator<DocVector> list_ite = docVectrorList.iterator();
 		while(list_ite.hasNext()){
@@ -55,7 +52,7 @@ public class SimilarityScorer {
 		for(DocVector docVec : docVectorList){
 			array2 = docVec.matrix.toArray();
 		}
-		double eudu = eud.compute(array1, array2);
+		eud.compute(array1, array2);
 		//		DocVecToArray [] dcarr = {new DocVecToArray(goldStdDocVec.id, goldStdDocVec.filename, goldStdDocVec.type)};
 		//		System.out.println("\t"+ eudu + "\t" + "{ gold_doc:"+goldStdDocVec.filename +goldStdDocVec.id+", doc:}" );
 		return eud.compute(array1, array2);
