@@ -31,7 +31,7 @@ public class DirectoryFileListIterator {
 		File directory = new File(dir);
 		File [] listOfFile = directory.listFiles();
 		for(File file : listOfFile){
-			if(file.isDirectory()){
+			if(file.isDirectory()||file.isFile()){
 				fileList.add(file.toString());
 			}
 		}
