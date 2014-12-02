@@ -65,10 +65,6 @@ public class LuceneIndexReaderDriver {
 			serf.serializeList(cosineSim, path_name+"_cos");
 		}
 
-
-		serf.readdSerializedFile(Constants.DATA_FOLDER+"r-lists/");
-
-
 		//		Double[] eudArr = eudDistList.toArray(new Double[eudDistList.size()]);
 		//		double[] toNormArr = ArrayUtils.toPrimitive(eudArr);
 		//		double [] normArr = simScore.normalizeArray(toNormArr);

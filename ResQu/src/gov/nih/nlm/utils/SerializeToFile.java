@@ -51,21 +51,4 @@ public class SerializeToFile {
 			System.out.println("File is: "+file+"  :  " + acard);
 		}
 	}
-	
-	public void readdSerializedFile (String filename){
-		double acard = 0;
-		DirectoryFileListIterator dir = new DirectoryFileListIterator();
-		List<String>files = dir.getDirectoryFolderList(filename);
-		for(String file : files){	
-			try {
-				FileInputStream in = new FileInputStream(file);
-				ObjectInputStream ois = new ObjectInputStream(in);
-				acard = (double) (ois.readObject());
-				ois.close();
-			} catch (Exception e) {
-				System.out.println("Problem serializing: " + e);
-			}
-			System.out.println("File is: "+file+"  :  " + acard);
-		}
-	}
 }
