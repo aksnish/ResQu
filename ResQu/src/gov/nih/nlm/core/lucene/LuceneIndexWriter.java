@@ -2,16 +2,25 @@ package gov.nih.nlm.core.lucene;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.core.KeywordAnalyzer;
+import org.apache.lucene.analysis.core.LowerCaseFilter;
+import org.apache.lucene.analysis.core.StopAnalyzer;
+import org.apache.lucene.analysis.core.StopFilter;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.standard.StandardFilter;
+import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.util.CharArraySet;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.FieldType;
-import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.FieldInfo.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
@@ -27,7 +36,8 @@ public class LuceneIndexWriter {
 
 	public LuceneIndexWriter(String dir){
 		try {
-			analyzer = new StandardAnalyzer();
+			analyzer = new StandardAnalyzer(StopAnalyzer.ENGLISH_STOP_WORDS_SET.EMPTY_SET);
+			//			analyzer = new KeywordAnalyzer();
 			if (indexWriter == null) {
 				IndexWriterConfig indexConfig = new IndexWriterConfig(Version.LUCENE_4_10_2, analyzer);
 				indexConfig.setOpenMode( IndexWriterConfig.OpenMode.CREATE);
