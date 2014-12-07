@@ -22,6 +22,7 @@ public class DocVector {
 		this.type = type;
 		this.filename = filename;
 		this.dictionary = dictionary;
+//		System.out.println("Dictional matrix :"+dictionary.toString());
 		this.matrix = new OpenMapRealVector(dictionary.size());
 	}
 
@@ -29,6 +30,8 @@ public class DocVector {
 		if (dictionary.containsKey(term)) {
 			int pos = dictionary.get(term);
 			matrix.setEntry(pos, freq);
+//			System.out.println("Term : "+ term + "  Pos: " + pos + " Freq : " + freq );//+ "matrix : " + matrix.toString().replaceAll(";", ","));
+			
 		}
 	}
 
