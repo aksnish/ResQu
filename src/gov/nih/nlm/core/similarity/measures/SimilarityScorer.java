@@ -6,9 +6,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.ml.distance.EuclideanDistance;
 
 import com.aliasi.cluster.KMeansClusterer;
+import com.aliasi.matrix.SvdMatrix;
 import com.aliasi.stats.Statistics;
 
 public class SimilarityScorer {
@@ -92,5 +95,4 @@ public class SimilarityScorer {
 
 		return Statistics.jsDivergence(resultG,result);
 	}
-
 }
