@@ -42,15 +42,15 @@ public class LuceneIndexReaderDriver {
 				indexReader =  new LuceneIndexReader(idxFile);
 				docList = indexReader.getDocs();
 				docVectrorList = indexReader.getDocVectors(docList); 
-				simScore = new SimilarityScorer(docVectrorList);
-				cosineSim = simScore.getCosineSimilarity(docVectrorList);
+				//				simScore = new SimilarityScorer(docVectrorList);
+				//				cosineSim = simScore.getCosineSimilarity(docVectrorList);
 				//				cosineSimList.add(cosineSim);
-				double euclidean = simScore.getEuclideanDistance(docVectrorList);
+				//				double euclidean = simScore.getEuclideanDistance(docVectrorList);
 				//				eudDistList.add(euclidean);
-				double jsD = simScore.getJSDivergence(docVectrorList);
-				jsdList.add(jsD);
+				//				double jsD = simScore.getJSDivergence(docVectrorList);
+				//				jsdList.add(jsD);
 				indexReader.close();
-				//				break;
+//				break;
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -62,7 +62,7 @@ public class LuceneIndexReaderDriver {
 			//			Double [] dArr = ArrayUtils.toObject(normArr);
 			//			List<Double> list = Arrays.asList(dArr);
 			//			serf.serializeList(list, path_name+"_eud");
-			serf.serializeList(cosineSim, path_name+"_cos");
+			//			serf.serializeList(cosineSim, path_name+"_cos");
 		}
 
 		//		Double[] eudArr = eudDistList.toArray(new Double[eudDistList.size()]);

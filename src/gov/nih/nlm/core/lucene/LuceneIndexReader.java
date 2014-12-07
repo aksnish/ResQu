@@ -88,11 +88,13 @@ public class LuceneIndexReader {
 						//docVec.setEntry(term.utf8ToString(), Double.parseDouble(Long.toString(termsEnum.totalTermFreq())), indexReader, Constants.CONTENT_FIELD);
 					}
 					docVecList.add(docVec);
+					System.out.println("File Name : "+ docVec.filename+"    "+docVec.toString().replaceAll(";", ","));
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		return docVecList;
 	}
 
