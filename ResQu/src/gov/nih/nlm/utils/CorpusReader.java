@@ -8,6 +8,8 @@ import java.util.List;
 
 public class CorpusReader {
 	String corpus_dir;
+	
+	public CorpusReader() {}
 
 	public CorpusReader(String input_dir) {
 		this.corpus_dir = input_dir;
@@ -23,14 +25,15 @@ public class CorpusReader {
 
 	public String getContent(String file_path) throws IOException {
 		//System.out.println("Getting the content");
+		String line;
 		BufferedReader bufReader = null;
-		StringBuffer buf = new StringBuffer(" ");
+		StringBuffer buf = new StringBuffer();
 		bufReader = new BufferedReader(new FileReader(file_path));
-		while(bufReader.readLine()!=null){
-			buf.append(bufReader.readLine());
-			buf.append("\n");
+		while((line = bufReader.readLine())!=null){
+//			System.out.println(line);
+				buf.append("\n").append(line);
 		}
 		bufReader.close();
-		return buf.toString();
+		return buf.toString().trim().replaceAll("null","");
 	}
 }
