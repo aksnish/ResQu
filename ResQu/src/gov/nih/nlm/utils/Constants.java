@@ -3,11 +3,15 @@ package gov.nih.nlm.utils;
 public class Constants {
 
 	public static final String PUBMED = "pubmed";
-	public static final String SIMPLE_MESH_HEADINGS = "[MH] AND Humans[mh] AND Clinical Trial [PTYP] AND 1860/01:2014/08[DCOM] ";
-	public static final String COMPLEX_MESH_HEADINGS = "/drug therapy"+SIMPLE_MESH_HEADINGS;
+	public static final String SIMPLE_MESH_HEADINGS = "[Mesh] AND Humans[mh] AND Clinical Trial [PTYP] AND 1860/01:2014/08[DCOM] ";
+	public static final String COMPLEX_DISEASE_MESH_HEADINGS = "/drug therapy"+SIMPLE_MESH_HEADINGS;
+	public static final String COMPLEX_DRUG_INDICATIONS_MESH_HEADINGS = "/therapeutic use\""+SIMPLE_MESH_HEADINGS;
+	public static final String COMPLEX_DRUG_EFFECTS_MESH_HEADINGS = "/adverse effects\""+SIMPLE_MESH_HEADINGS;
 	public static final String DRUG_THERAPY="drug therapy";
 	public static final String SIMPLE_EXTENSION="_S";
 	public static final String COMPLEX_EXTENSION="_C";
+	public static final String COMPLEX_DRUG_INDICATION_EXTENSION="_C1";
+	public static final String COMPLEX_DRUG_EFFECTS_EXTENSION="_C2";
 	public static final int  NO_OF_CITATIONS = 500;
 	public static final String MAX_NUMBER = "150000";
 	
@@ -22,6 +26,7 @@ public class Constants {
 	public static final String DATA_FOLDER = "data/";//"/usr/share/data/resqu/data/";
 	public static final String INPUT_FOLDER ="input/";
 	public static final String DISEASE_LIST=DATA_FOLDER+"disease_topic_list.txt";
+	public static final String DRUG_LIST=DATA_FOLDER+"drug_topic_list.txt";
 	public static final String DISEASE_FOLDER = DATA_FOLDER+INPUT_FOLDER+"disease/";
 	public static final String DRUG_FOLDER = DATA_FOLDER+INPUT_FOLDER+"drug/";
 	public static final String SEMREP_FOLDER = DATA_FOLDER+"semrep/";
