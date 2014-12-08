@@ -59,19 +59,33 @@ public class FilenameGenerator {
 			directory.mkdirs();
 
 			//System.out.println("Dir : "+directory);
-			if(querystr.contains(Constants.DRUG_THERAPY)||querystr.contains("_C")){
+			if(querystr.contains(Constants.COMPLEX_DISEASE_MESH_HEADINGS)||querystr.contains("_C")){
 				filename = directory+"/"+topic+Constants.COMPLEX_EXTENSION;
-			}else if(querystr.contains("_S")){ 
+			}else if(querystr.contains(Constants.COMPLEX_DRUG_INDICATIONS_MESH_HEADINGS))
+			{
+				filename = directory+"/"+topic+Constants.COMPLEX_DRUG_INDICATION_EXTENSION;
+			}else if(querystr.contains(Constants.COMPLEX_DRUG_EFFECTS_MESH_HEADINGS))
+			{
+				filename = directory+"/"+topic+Constants.COMPLEX_DRUG_EFFECTS_EXTENSION;
+			}else // if(querystr.contains("_S")){ 
+			{
 				filename = directory+"/"+topic+Constants.SIMPLE_EXTENSION;
 			}
 			filename=filename.replaceAll(" ", "_");
 		}
 		else{
-			System.out.println("directory already exists"+directory);
-			if(querystr.contains(Constants.DRUG_THERAPY)||querystr.contains("_C"))
+//			System.out.println("directory already exists"+directory);
+			if(querystr.contains(Constants.COMPLEX_DISEASE_MESH_HEADINGS)||querystr.contains("_C"))
 			{
 				filename = directory+"/"+topic+Constants.COMPLEX_EXTENSION;
-			}else if(querystr.contains("_S")){ 
+			}else if(querystr.contains(Constants.COMPLEX_DRUG_INDICATIONS_MESH_HEADINGS))
+			{
+				filename = directory+"/"+topic+Constants.COMPLEX_DRUG_INDICATION_EXTENSION;
+			}else if(querystr.contains(Constants.COMPLEX_DRUG_EFFECTS_MESH_HEADINGS))
+			{
+				filename = directory+"/"+topic+Constants.COMPLEX_DRUG_EFFECTS_EXTENSION;
+			}else  //if(querystr.contains("_S")){ 
+			{
 				filename = directory+"/"+topic+Constants.SIMPLE_EXTENSION;
 			}
 			filename=filename.replaceAll(" ", "_");
@@ -83,11 +97,11 @@ public class FilenameGenerator {
 
 
 
-		public static void main(String[] args) throws IOException {
-			FilenameGenerator fg = new FilenameGenerator();
-//			String file = fg.normalizeFileName("data/disease/Migraine Disorders_S.txt");
-//			System.out.println(file);
-			fg.setFilename(Constants.SUM_DOC_DIR, "Migraine_S","Migraine", 1);
-		}
+	public static void main(String[] args) throws IOException {
+		FilenameGenerator fg = new FilenameGenerator();
+		//			String file = fg.normalizeFileName("data/disease/Migraine Disorders_S.txt");
+		//			System.out.println(file);
+		System.out.println(fg.setFilename(Constants.DATA_FOLDER+Constants.INPUT_FOLDER, "Migraine_S","Migraine", 1));
+	}
 
 }
