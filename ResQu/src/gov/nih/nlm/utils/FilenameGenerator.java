@@ -74,7 +74,7 @@ public class FilenameGenerator {
 			filename=filename.replaceAll(" ", "_");
 		}
 		else{
-//			System.out.println("directory already exists"+directory);
+			//			System.out.println("directory already exists"+directory);
 			if(querystr.contains(Constants.COMPLEX_DISEASE_MESH_HEADINGS)||querystr.contains("_C"))
 			{
 				filename = directory+"/"+topic+Constants.COMPLEX_EXTENSION;
@@ -96,12 +96,30 @@ public class FilenameGenerator {
 
 
 
+	public String setFilename (String directoryPrefix , String parentFolder , String file){
+		String parentfile = parentFolder.toString().substring(parentFolder.toString().lastIndexOf("/")+1, parentFolder.toString().length());
+		String dir = directoryPrefix+parentfile;
+		File directory = new File(dir);
+		String filename;
+		if (!directory.exists()) {
+			directory.mkdirs();
+			filename = directory+"/"+file+".semrep";
+		}
+		else{
+			filename = directory+"/"+file+".semrep";
+		}
+		return filename;
+	}
+
+
+
 
 	public static void main(String[] args) throws IOException {
 		FilenameGenerator fg = new FilenameGenerator();
 		//			String file = fg.normalizeFileName("data/disease/Migraine Disorders_S.txt");
 		//			System.out.println(file);
-		System.out.println(fg.setFilename(Constants.DATA_FOLDER+Constants.INPUT_FOLDER, "Migraine_S","Migraine", 1));
+//		System.out.println(fg.setFilename(Constants.DATA_FOLDER+Constants.INPUT_FOLDER, "Migraine_S","Migraine", 1));
+		System.out.println(fg.setFilename(Constants.SUMMARIZE_FOLDER+"disease/","data/semrep/disease/03-Asthma","Asthma"));
 	}
 
 }

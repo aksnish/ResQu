@@ -30,6 +30,8 @@ public class Constants {
 	public static final String DISEASE_FOLDER = DATA_FOLDER+INPUT_FOLDER+"disease/";
 	public static final String DRUG_FOLDER = DATA_FOLDER+INPUT_FOLDER+"drug/";
 	public static final String SEMREP_FOLDER = DATA_FOLDER+"semrep/";
+	public static final String SEMREP_DISEASE_FOLDER = DATA_FOLDER+"semrep/disease/";
+	public static final String SEMREP_DRUG_FOLDER = DATA_FOLDER+"semrep/drug/";
 	
 	public static final String SUMMARIZE_FOLDER = DATA_FOLDER+"summarized-triples/";
 	public static final String USER_AGENT = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.11) Gecko/2009060215 Firefox/3.0.11 GTB6 (.NET CLR 3.5.30729)";
