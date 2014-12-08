@@ -34,6 +34,7 @@ public class PredicationBuilder {
 					String subject = pred.getSubject(line);
 					String predicate = pred.getPredicate(line);
 					String object = pred.getObject(line);
+				
 					serialize(subject, predicate, object, out);
 				}
 			}
@@ -46,7 +47,7 @@ public class PredicationBuilder {
 	}
 
 	public void serialize(String subject, String predicate, String object, PrintWriter out) {
-		String delimeter = "-";
+		String delimeter = "|";
 		out.println(subject+delimeter+predicate+delimeter+object);
 	}
 
